@@ -1,28 +1,39 @@
 const FAR = {};
 // api source: https://github.com/mattjmattj/simple-undo
 FAR.history = new SimpleUndo({
-    maxLength: 20,
-    provider: function(done){
+    maxLength: 100,
+    provider: function (done) {
         done(getContent());
     }
 });
 FAR.history.initialize(getContent());
 
-document.getElementById("FARTextarea").addEventListener("keydown", 
-(e) => {
-    var evtobj = window.event ? event : e
-    // detect ctrl+z (undo)
-    if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
-        FAR.history.undo(setContent);
-    };
-});
+document.getElementById("FARTextarea").addEventListener("keydown",
+    (e) => {
+        var evtobj = window.event ? event : e
+        // detect ctrl+z (undo)
+        if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
+            FAR.history.undo(setContent);
+        };
+    });
 
 document.getElementById("termSearch").addEventListener("keydown", disableUndo);
 document.getElementById("termReplace").addEventListener("keydown", disableUndo);
-document.getElementById("termSearch").addEventListener("keyup",disableUndo);
-document.getElementById("termReplace").addEventListener("keyup",disableUndo);
-document.getElementById("FARTextarea").addEventListener("keyup",disableUndo);
-document.getElementById("FARTextarea").addEventListener("keydown",disableUndo);
+document.getElementById("termSearch").addEventListener("keyup", disableUndo);
+document.getElementById("termReplace").addEventListener("keyup", disableUndo);
+document.getElementById("FARTextarea").addEventListener("keyup", disableUndo);
+document.getElementById("FARTextarea").addEventListener("keydown", disableUndo);
+
+FAR.previousContent = getContent();
+document.getElementById("FARTextarea").addEventListener("input", () => {
+    const difference = getDifference(FAR.previousContent, getContent());
+    if ((difference.length === 1 && /\W/.test(difference)) ||
+        difference.length > 1) {
+        FAR.history.save();
+    }
+    FAR.previousContent = getContent();
+});
+
 function disableUndo(e) {
     var evtobj = window.event ? event : e
     // disable ctrl+z (undo)
@@ -33,7 +44,7 @@ function disableUndo(e) {
 };
 
 FAR.find = function () {
-	console.log('TCL: FAR.find -> find');
+    console.log('TCL: FAR.find -> find');
     const textarea = document.getElementById("FARTextarea");
     // collect variables
     var txt = textarea.value;
@@ -48,7 +59,7 @@ FAR.find = function () {
 
     // find next index of searchterm, starting from current cursor position
     var cursorPos = getCursorPosEnd(textarea);
-	console.log('TCL: FAR.find -> cursorPos', cursorPos);
+    console.log('TCL: FAR.find -> cursorPos', cursorPos);
     var termPos = txt.indexOf(strSearchTerm, cursorPos);
 
     // if found, select it
@@ -137,9 +148,10 @@ document.getElementById("findAndReplace").addEventListener("click", FAR.findAndR
 document.getElementById("replaceAll").addEventListener("click", FAR.replaceAll);
 
 // Util methods
-function getCursorPosEnd(input){
+function getCursorPosEnd(input) {
     return getCursorPos(input).end;
 }
+
 function getCursorPos(input) {
     input.focus();
     if ("selectionStart" in input && document.activeElement == input) {
@@ -168,12 +180,32 @@ function getCursorPos(input) {
     }
     return -1;
 }
-function copyString(str){
+
+function copyString(str) {
     return (' ' + str).slice(1)
 }
-function getContent(){
+// source: https://stackoverflow.com/a/29574724/6798201
+//assuming "b" contains a subsequence containing 
+//all of the letters in "a" in the same order
+function getDifference(a, b) {
+    var i = 0;
+    var j = 0;
+    var result = "";
+
+    while (j < b.length) {
+        if (a[i] != b[j] || i == a.length)
+            result += b[j];
+        else
+            i++;
+        j++;
+    }
+    return result;
+}
+
+function getContent() {
     return copyString(document.getElementById("FARTextarea").value);
 }
-function setContent(newContent){
+
+function setContent(newContent) {
     document.getElementById("FARTextarea").value = newContent;
 }
