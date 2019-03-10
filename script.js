@@ -30,18 +30,19 @@ document.getElementById("FARTextarea").addEventListener("keydown", disableUndo);
 
 FAR.previousContent = getContent();
 document.getElementById("FARTextarea").addEventListener("input", updateHistory);
-function updateHistory(){
-	console.log('TCL: input');
+
+function updateHistory() {
+    console.log('TCL: input');
     const content = getContent();
     const difference = getDifference(FAR.previousContent, content);
-	console.log('TCL: difference', difference);
+    console.log('TCL: difference', difference);
     const lastVersionIndex = FAR.history.count();
     if ((difference.length === 1 && /\W/.test(difference)) ||
         difference.length > 1 ||
         lastVersionIndex === 0) {
-            console.log("Saving latest history version...");
+        console.log("Saving latest history version...");
         FAR.history.save();
-    } else{ // update last history version
+    } else { // update last history version
         FAR.history.stack[lastVersionIndex] = content;
     }
     FAR.previousContent = content;
@@ -56,7 +57,15 @@ function disableUndo(e) {
     };
 };
 
-FAR.find = function () {
+FAR.findNext = function (){
+    FAR.find(true);
+}
+
+FAR.findPrevious = function (){
+    FAR.find(false);
+}
+
+FAR.find = function (lookForNext) {
     console.log('TCL: FAR.find -> find');
     const textarea = document.getElementById("FARTextarea");
     // collect variables
@@ -71,16 +80,30 @@ FAR.find = function () {
     }
 
     // find next index of searchterm, starting from current cursor position
-    var cursorPos = getCursorPosEnd(textarea);
-    console.log('TCL: FAR.find -> cursorPos', cursorPos);
-    var termPos = txt.indexOf(strSearchTerm, cursorPos);
+    var cursorPosEnd = getCursorPosEnd(textarea);
+    console.log('TCL: FAR.find -> cursorPos', cursorPosEnd);
+    if (lookForNext) { // next match
+        var termPos = txt.indexOf(strSearchTerm, cursorPosEnd);
+    } else { // previous match
+        var cursorPosStart = getCursorPosStart(textarea) - 1;
+        if (cursorPosStart < 0){
+            var termPos = -1;
+        } else{
+            var termPos = txt.lastIndexOf(strSearchTerm, cursorPosStart);
+        }
+    }
 
     // if found, select it
     if (termPos != -1) {
         textarea.setSelectionRange(termPos, termPos + strSearchTerm.length);
     } else {
-        // not found from cursor pos, so start from beginning
-        termPos = txt.indexOf(strSearchTerm);
+        // not found from cursor pos
+        if (lookForNext) {
+            // so start from beginning
+            termPos = txt.indexOf(strSearchTerm);
+        } else{
+            termPos = txt.lastIndexOf(strSearchTerm);
+        }
         if (termPos != -1) {
             textarea.setSelectionRange(termPos, termPos + strSearchTerm.length);
         } else {
@@ -156,13 +179,17 @@ FAR.replaceAll = function () {
     }
 };
 
-document.getElementById("find").addEventListener("click", FAR.find);
+document.getElementById("find").addEventListener("click", FAR.findNext);
 document.getElementById("findAndReplace").addEventListener("click", FAR.findAndReplace);
 document.getElementById("replaceAll").addEventListener("click", FAR.replaceAll);
 
 // Util methods
 function getCursorPosEnd(input) {
     return getCursorPos(input).end;
+}
+
+function getCursorPosStart(input) {
+    return getCursorPos(input).start;
 }
 
 // source: https://stackoverflow.com/a/7745998/6798201
