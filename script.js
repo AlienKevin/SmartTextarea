@@ -165,6 +165,7 @@ function getCursorPosEnd(input) {
     return getCursorPos(input).end;
 }
 
+// source: https://stackoverflow.com/a/7745998/6798201
 function getCursorPos(input) {
     input.focus();
     if ("selectionStart" in input && document.activeElement == input) {
@@ -194,6 +195,7 @@ function getCursorPos(input) {
     return -1;
 }
 
+// source: https://stackoverflow.com/a/31733628/6798201
 function copyString(str) {
     return (' ' + str).slice(1)
 }
