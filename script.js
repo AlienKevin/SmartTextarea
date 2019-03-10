@@ -26,12 +26,16 @@ document.getElementById("FARTextarea").addEventListener("keydown", disableUndo);
 
 FAR.previousContent = getContent();
 document.getElementById("FARTextarea").addEventListener("input", () => {
-    const difference = getDifference(FAR.previousContent, getContent());
+    const content = getContent();
+    const difference = getDifference(FAR.previousContent, content);
     if ((difference.length === 1 && /\W/.test(difference)) ||
         difference.length > 1) {
         FAR.history.save();
+    } else{ // update last history version
+        const lastIndex = FAR.history.count();
+        FAR.history.stack[lastIndex] = content;
     }
-    FAR.previousContent = getContent();
+    FAR.previousContent = content;
 });
 
 function disableUndo(e) {
