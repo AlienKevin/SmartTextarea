@@ -179,7 +179,8 @@ FAR.replaceAll = function () {
     }
 };
 
-document.getElementById("find").addEventListener("click", FAR.findNext);
+document.getElementById("findPrevious").addEventListener("click", FAR.findPrevious);
+document.getElementById("findNext").addEventListener("click", FAR.findNext);
 document.getElementById("findAndReplace").addEventListener("click", FAR.findAndReplace);
 document.getElementById("replaceAll").addEventListener("click", FAR.replaceAll);
 
