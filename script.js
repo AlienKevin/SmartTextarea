@@ -187,6 +187,15 @@ document.getElementById("findNext").addEventListener("click", FAR.findNext);
 document.getElementById("findAndReplace").addEventListener("click", FAR.findAndReplace);
 document.getElementById("replaceAll").addEventListener("click", FAR.replaceAll);
 
+document.addEventListener("mouseover", toggleBtnHighlight);
+document.addEventListener("mouseout", toggleBtnHighlight);
+function toggleBtnHighlight(e) {
+    const hoveredButton = e.target.closest(".btn");
+    if (hoveredButton) {
+        hoveredButton.classList.toggle("btn-hover");
+    }
+}
+
 // Util methods
 function getCursorPosEnd(input) {
     return getCursorPos(input).end;
