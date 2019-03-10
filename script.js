@@ -14,7 +14,8 @@ FAR.find = function () {
     }
 
     // find next index of searchterm, starting from current cursor position
-    var cursorPos = getCursorPos(textarea);
+    var cursorPos = getCursorPosEnd(textarea);
+	console.log('TCL: FAR.find -> cursorPos', cursorPos);
     var termPos = txt.indexOf(strSearchTerm, cursorPos);
 
     // if found, select it
@@ -48,7 +49,7 @@ FAR.findAndReplace = function () {
     }
 
     // find next index of searchterm, starting from current cursor position
-    var cursorPos = getCursorPos(textarea);
+    var cursorPos = getCursorPosEnd(textarea);
     var termPos = txt.indexOf(strSearchTerm, cursorPos);
     var newText = '';
 
@@ -101,7 +102,11 @@ document.getElementById("findAndReplace").addEventListener("click", FAR.findAndR
 document.getElementById("replaceAll").addEventListener("click", FAR.replaceAll);
 
 // Util methods
+function getCursorPosEnd(input){
+    return getCursorPos(input).end;
+}
 function getCursorPos(input) {
+    input.focus();
     if ("selectionStart" in input && document.activeElement == input) {
         return {
             start: input.selectionStart,
