@@ -2,11 +2,25 @@ const FAR = {};
 // api source: https://github.com/mattjmattj/simple-undo
 FAR.history = new SimpleUndo({
     maxLength: 20,
-    provider: FAR.textareaContentProvider
+    provider: function(done){
+        done(document.getElementById("FARTextarea").value);
+    }
 });
-FAR.textareaContentProvider = function textareaContentProvider(done){
-    done(document.getElementById("FARTextarea").value);
-}
+FAR.history.save();
+
+document.getElementById("FARTextarea").addEventListener("keydown", 
+(e) => {
+    var evtobj = window.event ? event : e
+    // detect ctrl+z (undo)
+    if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
+        FAR.history.undo(FAR.textareaContentSetter);
+    };
+});
+
+FAR.textareaContentSetter = function textareaContentSetter(value){
+    document.getElementById("FARTextarea").value = value;
+};
+
 FAR.find = function () {
 	console.log('TCL: FAR.find -> find');
     const textarea = document.getElementById("FARTextarea");
