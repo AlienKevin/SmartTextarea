@@ -17,6 +17,22 @@ document.getElementById("FARTextarea").addEventListener("keydown",
     };
 });
 
+document.getElementById("termSearch").addEventListener("keydown", disableUndo);
+document.getElementById("termReplace").addEventListener("keydown", disableUndo);
+document.getElementById("termSearch").addEventListener("keyup",disableUndo);
+document.getElementById("termReplace").addEventListener("keyup",disableUndo);
+document.getElementById("FARTextarea").addEventListener("keyup",disableUndo);
+document.getElementById("FARTextarea").addEventListener("keydown",disableUndo);
+function disableUndo(e) {
+    console.log("Trying to prevent undo...");
+    var evtobj = window.event ? event : e
+    // disable ctrl+z (undo)
+    if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
+        console.log("preventing undo...");
+        e.preventDefault();
+    };
+};
+
 FAR.textareaContentSetter = function textareaContentSetter(value){
     document.getElementById("FARTextarea").value = value;
 };
