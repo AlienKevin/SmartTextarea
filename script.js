@@ -25,18 +25,23 @@ document.getElementById("FARTextarea").addEventListener("keyup", disableUndo);
 document.getElementById("FARTextarea").addEventListener("keydown", disableUndo);
 
 FAR.previousContent = getContent();
-document.getElementById("FARTextarea").addEventListener("input", () => {
+document.getElementById("FARTextarea").addEventListener("input", updateHistory);
+function updateHistory(){
+	console.log('TCL: input');
     const content = getContent();
     const difference = getDifference(FAR.previousContent, content);
+	console.log('TCL: difference', difference);
+    const lastVersionIndex = FAR.history.count();
     if ((difference.length === 1 && /\W/.test(difference)) ||
-        difference.length > 1) {
+        difference.length > 1 ||
+        lastVersionIndex === 0) {
+            console.log("Saving latest history version...");
         FAR.history.save();
     } else{ // update last history version
-        const lastIndex = FAR.history.count();
-        FAR.history.stack[lastIndex] = content;
+        FAR.history.stack[lastVersionIndex] = content;
     }
     FAR.previousContent = content;
-});
+}
 
 function disableUndo(e) {
     var evtobj = window.event ? event : e
