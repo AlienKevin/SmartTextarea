@@ -3,17 +3,17 @@ const FAR = {};
 FAR.history = new SimpleUndo({
     maxLength: 20,
     provider: function(done){
-        done(document.getElementById("FARTextarea").value);
+        done(getContent());
     }
 });
-FAR.history.save();
+FAR.history.initialize(getContent());
 
 document.getElementById("FARTextarea").addEventListener("keydown", 
 (e) => {
     var evtobj = window.event ? event : e
     // detect ctrl+z (undo)
     if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
-        FAR.history.undo(FAR.textareaContentSetter);
+        FAR.history.undo(setContent);
     };
 });
 
@@ -24,17 +24,12 @@ document.getElementById("termReplace").addEventListener("keyup",disableUndo);
 document.getElementById("FARTextarea").addEventListener("keyup",disableUndo);
 document.getElementById("FARTextarea").addEventListener("keydown",disableUndo);
 function disableUndo(e) {
-    console.log("Trying to prevent undo...");
     var evtobj = window.event ? event : e
     // disable ctrl+z (undo)
     if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
-        console.log("preventing undo...");
+        // console.log("preventing undo...");
         e.preventDefault();
     };
-};
-
-FAR.textareaContentSetter = function textareaContentSetter(value){
-    document.getElementById("FARTextarea").value = value;
 };
 
 FAR.find = function () {
@@ -172,4 +167,13 @@ function getCursorPos(input) {
         }
     }
     return -1;
+}
+function copyString(str){
+    return (' ' + str).slice(1)
+}
+function getContent(){
+    return copyString(document.getElementById("FARTextarea").value);
+}
+function setContent(newContent){
+    document.getElementById("FARTextarea").value = newContent;
 }
