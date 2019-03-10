@@ -99,18 +99,18 @@ FAR.findAndReplace = function () {
 
     // if found, replace it, then select it
     if (termPos != -1) {
-        FAR.history.save();
         newText = origTxt.substring(0, termPos) + strReplaceWith + origTxt.substring(termPos + strSearchTerm.length, origTxt.length)
         textarea.value = newText;
         textarea.setSelectionRange(termPos, termPos + strReplaceWith.length);
+        FAR.history.save();
     } else {
         // not found from cursor pos, so start from beginning
         termPos = txt.indexOf(strSearchTerm);
         if (termPos != -1) {
-            FAR.history.save();
             newText = origTxt.substring(0, termPos) + strReplaceWith + origTxt.substring(termPos + strSearchTerm.length, origTxt.length)
             textarea.value = newText;
             textarea.setSelectionRange(termPos, termPos + strReplaceWith.length);
+            FAR.history.save();
         } else {
             alert("not found");
         }
