@@ -1,7 +1,7 @@
-var SAR = {};
-
-SAR.find = function () {
-    const textarea = document.getElementById("SARTextarea");
+const FAR = {};
+FAR.find = function () {
+	console.log('TCL: FAR.find -> find');
+    const textarea = document.getElementById("FARTextarea");
     // collect variables
     var txt = textarea.value;
     var strSearchTerm = document.getElementById("termSearch").value;
@@ -31,8 +31,8 @@ SAR.find = function () {
     }
 };
 
-SAR.findAndReplace = function () {
-    const textarea = document.getElementById("SARTextarea");
+FAR.findAndReplace = function () {
+    const textarea = document.getElementById("FARTextarea");
     // collect variables
     var origTxt = textarea.value; // needed for text replacement
     var txt = textarea.value;
@@ -70,8 +70,8 @@ SAR.findAndReplace = function () {
     }
 };
 
-SAR.replaceAll = function () {
-    const textarea = document.getElementById("SARTextarea");
+FAR.replaceAll = function () {
+    const textarea = document.getElementById("FARTextarea");
     // collect variables
     var txt = textarea.value;
     var strSearchTerm = document.getElementById("termSearch").value;
@@ -92,10 +92,15 @@ SAR.replaceAll = function () {
     }
 
     for (var match in matches) {
-        SAR.findAndReplace();
+        FAR.findAndReplace();
     }
 };
 
+document.getElementById("find").addEventListener("click", FAR.find);
+document.getElementById("findAndReplace").addEventListener("click", FAR.findAndReplace);
+document.getElementById("replaceAll").addEventListener("click", FAR.replaceAll);
+
+// Util methods
 function getCursorPos(input) {
     if ("selectionStart" in input && document.activeElement == input) {
         return {

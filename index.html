@@ -1,13 +1,28 @@
-<textarea class="SARTextarea" style="width: 300px; height:100px">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Find and Replace</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <textarea id="FARTextarea" style="width: 300px; height:100px">
     This is a test. A test, i say. The word TEST is mentioned three times.
 </textarea>
 
-<div>
-    <input type="text" id="termSearch" name="termSearch" placeholder="Search" /><br />
-    <input type="text" id="termReplace" name="termReplace" placeholder="Replace" /><br />
-    <label for="caseSensitive">Case Sensitive</label>
-    <input type="checkbox" name="caseSensitive" id="caseSensitive" /><br />
-    <a href="#" onclick="SAR.find(); return false;" id="find">FIND</a><br />
-    <a href="#" onclick="SAR.findAndReplace(); return false;" id="findAndReplace">FIND/REPLACE</a><br />
-    <a href="#" onclick="SAR.replaceAll(); return false;" id="replaceAll">REPLACE ALL</a><br />
-</div>
+    <div>
+        <input type="text" id="termSearch" name="termSearch" placeholder="Find" /><br />
+        <input type="text" id="termReplace" name="termReplace" placeholder="Replace" /><br />
+        <label for="caseSensitive">Case Sensitive</label>
+        <input type="checkbox" name="caseSensitive" id="caseSensitive" /><br />
+        <span id="find" class="btn">Find</span>
+        <span id="findAndReplace" class="btn">Find/Replace</span>
+        <span id="replaceAll" class="btn">Replace All</span>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

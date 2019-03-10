@@ -1,0 +1,21 @@
+.btn {
+    -webkit-transition: -webkit-box-shadow .3s;
+    transition: -webkit-box-shadow .3s;
+    transition: box-shadow .3s;
+    transition: box-shadow .3s, -webkit-box-shadow .3s;
+    background: #eee;
+    padding: .5em;
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    display: inline-block;
+}
+
+.btn-hover {
+    /* source: https://codepen.io/ovdojoey/pen/BomKyZ*/
+    -webkit-box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+            box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+    background: #ddd;
+}
