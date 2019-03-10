@@ -58,11 +58,11 @@ function disableUndo(e) {
     };
 };
 
-FAR.findNext = function (){
+FAR.findNext = function () {
     FAR.find(true);
 }
 
-FAR.findPrevious = function (){
+FAR.findPrevious = function () {
     FAR.find(false);
 }
 
@@ -87,9 +87,9 @@ FAR.find = function (lookForNext) {
         var termPos = txt.indexOf(strSearchTerm, cursorPosEnd);
     } else { // previous match
         var cursorPosStart = getCursorPosStart(textarea) - 1;
-        if (cursorPosStart < 0){
+        if (cursorPosStart < 0) {
             var termPos = -1;
-        } else{
+        } else {
             var termPos = txt.lastIndexOf(strSearchTerm, cursorPosStart);
         }
     }
@@ -102,7 +102,7 @@ FAR.find = function (lookForNext) {
         if (lookForNext) {
             // so start from beginning
             termPos = txt.indexOf(strSearchTerm);
-        } else{
+        } else {
             termPos = txt.lastIndexOf(strSearchTerm);
         }
         if (termPos != -1) {

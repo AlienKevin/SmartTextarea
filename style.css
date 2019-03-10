@@ -7,15 +7,23 @@
     padding: .5em;
     cursor: pointer;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-    display: inline-block;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 2em;
+    width: 2em;
 }
 
 .btn-hover {
     /* source: https://codepen.io/ovdojoey/pen/BomKyZ*/
     -webkit-box-shadow: 0 0 11px rgba(33, 33, 33, .2);
-            box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+    box-shadow: 0 0 11px rgba(33, 33, 33, .2);
     background: #ddd;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: calc((2em - 30px)/2 - 4px);
 }
