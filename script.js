@@ -1,4 +1,12 @@
 const FAR = {};
+// api source: https://github.com/mattjmattj/simple-undo
+FAR.history = new SimpleUndo({
+    maxLength: 20,
+    provider: FAR.textareaContentProvider
+});
+FAR.textareaContentProvider = function textareaContentProvider(done){
+    done(document.getElementById("FARTextarea").value);
+}
 FAR.find = function () {
 	console.log('TCL: FAR.find -> find');
     const textarea = document.getElementById("FARTextarea");
@@ -55,6 +63,7 @@ FAR.findAndReplace = function () {
 
     // if found, replace it, then select it
     if (termPos != -1) {
+        FAR.history.save();
         newText = origTxt.substring(0, termPos) + strReplaceWith + origTxt.substring(termPos + strSearchTerm.length, origTxt.length)
         textarea.value = newText;
         textarea.setSelectionRange(termPos, termPos + strReplaceWith.length);
@@ -62,6 +71,7 @@ FAR.findAndReplace = function () {
         // not found from cursor pos, so start from beginning
         termPos = txt.indexOf(strSearchTerm);
         if (termPos != -1) {
+            FAR.history.save();
             newText = origTxt.substring(0, termPos) + strReplaceWith + origTxt.substring(termPos + strSearchTerm.length, origTxt.length)
             textarea.value = newText;
             textarea.setSelectionRange(termPos, termPos + strReplaceWith.length);
