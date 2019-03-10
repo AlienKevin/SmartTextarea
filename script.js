@@ -15,6 +15,10 @@ document.getElementById("FARTextarea").addEventListener("keydown",
         if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
             FAR.history.undo(setContent);
         };
+        // detect ctrl+y (redo)
+        if (evtobj.keyCode == 89 && evtobj.ctrlKey) {
+            FAR.history.redo(setContent);
+        };
     });
 
 document.getElementById("termSearch").addEventListener("keydown", disableUndo);
