@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Find and Replace</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/solid.css" integrity="sha384-r/k8YTFqmlOaqRkZuSiE9trsrDXkh07mRaoGBMoDcmA58OHILZPsk29i2BsFng1B" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/fontawesome.css" integrity="sha384-4aon80D8rXCGx9ayDt85LbyUHeMWd3UiBaWliBlJ53yzm9hqN21A+o1pqoyK04h+" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/solid.css" integrity="sha384-r/k8YTFqmlOaqRkZuSiE9trsrDXkh07mRaoGBMoDcmA58OHILZPsk29i2BsFng1B"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/fontawesome.css" integrity="sha384-4aon80D8rXCGx9ayDt85LbyUHeMWd3UiBaWliBlJ53yzm9hqN21A+o1pqoyK04h+"
+        crossorigin="anonymous">
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -15,14 +17,18 @@
     This is a test. A test, i say. The word TEST is mentioned three times.
 </textarea>
 
-    <div>
-        <input type="text" id="termSearch" name="termSearch" placeholder="Find" title="Find" /><br />
-        <input type="text" id="termReplace" name="termReplace" placeholder="Replace" title="Replace"/><br />
-        <span id="caseSensitive" title="Match Case" class="btn"><img src="icons/caseSensitivity.svg" class="icon"></span>
-        <span id="findPrevious" class="btn"><i class="fas fa-arrow-left"></i></span>
-        <span id="findNext" class="btn"><i class="fas fa-arrow-right"></i></span>
-        <span id="findAndReplace" class="btn"><img src="icons/findAndReplace.svg" class="icon"></span>
-        <span id="replaceAll" class="btn"><img src="icons/replaceAll.svg" class="icon"></span>
+    <div class="smartTextarea">
+        <div id="findField">
+            <input type="text" id="termSearch" name="termSearch" placeholder="Find" title="Find" />
+            <span id="caseSensitive" title="Match Case" class="btn"><img src="icons/caseSensitivity.svg" class="icon"></span>
+            <span id="findPrevious" title="Find Previous" class="btn"><i class="fas fa-arrow-left"></i></span>
+            <span id="findNext" title="Find Next" class="btn"><i class="fas fa-arrow-right"></i></span>
+        </div>
+        <div id="replaceField">
+            <input type="text" id="termReplace" name="termReplace" placeholder="Replace" title="Replace" />
+            <span id="findAndReplace" title="Find & Replace" class="btn"><img src="icons/findAndReplace.svg" class="icon"></span>
+            <span id="replaceAll" title="Replace All" class="btn"><img src="icons/replaceAll.svg" class="icon"></span>
+        </div>
     </div>
     <script src="simpleUndo.js"></script>
     <script src="script.js"></script>

@@ -1,10 +1,18 @@
+.smartTextarea{
+    margin: .5em 0;
+}
+.smartTextarea input{
+    height: 1.5em;
+    font-size: 1em;
+}
+
 .btn {
     -webkit-transition: -webkit-box-shadow .3s;
     transition: -webkit-box-shadow .3s;
     transition: box-shadow .3s;
     transition: box-shadow .3s, -webkit-box-shadow .3s;
     background: #eee;
-    padding: .5em;
+    padding: .3em;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -26,4 +34,8 @@
     height: 30px;
     position: relative;
     top: calc((2em - 30px)/2 - 4px);
+}
+
+#replaceField{
+    margin-top: .5em;
 }
