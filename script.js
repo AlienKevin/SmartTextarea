@@ -1,5 +1,6 @@
 // Based on: https://stackoverflow.com/a/7781395/6798201
 const FAR = {};
+FAR.isCaseSensitive = false; // default to be case insensitive
 // api source: https://github.com/mattjmattj/simple-undo
 FAR.history = new SimpleUndo({
     maxLength: 100,
@@ -72,10 +73,9 @@ FAR.find = function (lookForNext) {
     // collect variables
     var txt = textarea.value;
     var strSearchTerm = document.getElementById("termSearch").value;
-    var isCaseSensitive = document.getElementById("caseSensitive").checked;
 
     // make text lowercase if search is supposed to be case insensitive
-    if (isCaseSensitive == false) {
+    if (FAR.isCaseSensitive == false) {
         txt = txt.toLowerCase();
         strSearchTerm = strSearchTerm.toLowerCase();
     }
@@ -120,11 +120,10 @@ FAR.findAndReplace = function () {
     var txt = textarea.value;
     var strSearchTerm = document.getElementById("termSearch").value;
     var strReplaceWith = document.getElementById("termReplace").value;
-    var isCaseSensitive = document.getElementById("caseSensitive").checked;
     var termPos;
 
     // make text lowercase if search is supposed to be case insensitive
-    if (isCaseSensitive == false) {
+    if (FAR.isCaseSensitive == false) {
         txt = txt.toLowerCase();
         strSearchTerm = strSearchTerm.toLowerCase();
     }
@@ -159,10 +158,9 @@ FAR.replaceAll = function () {
     // collect variables
     var txt = textarea.value;
     var strSearchTerm = document.getElementById("termSearch").value;
-    var isCaseSensitive = document.getElementById("caseSensitive").checked;
 
     // make text lowercase if search is supposed to be case insensitive
-    if (isCaseSensitive == false) {
+    if (FAR.isCaseSensitive == false) {
         txt = txt.toLowerCase();
         strSearchTerm = strSearchTerm.toLowerCase();
     }
@@ -180,6 +178,10 @@ FAR.replaceAll = function () {
     }
 };
 
+document.getElementById("caseSensitive").addEventListener("click", (e) => {
+    FAR.isCaseSensitive = !FAR.isCaseSensitive;
+    document.getElementById("caseSensitive").classList.toggle("btn-hover");
+})
 document.getElementById("findPrevious").addEventListener("click", FAR.findPrevious);
 document.getElementById("findNext").addEventListener("click", FAR.findNext);
 document.getElementById("findAndReplace").addEventListener("click", FAR.findAndReplace);
