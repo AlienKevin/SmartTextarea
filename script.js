@@ -1,3 +1,4 @@
+// Based on: https://stackoverflow.com/a/7781395/6798201
 const FAR = {};
 // api source: https://github.com/mattjmattj/simple-undo
 FAR.history = new SimpleUndo({
