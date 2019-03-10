@@ -1,9 +1,17 @@
+body{
+    font-size: 16px;
+}
 .smartTextarea{
-    margin: .5em 0;
+    font-size: 1.1rem;
+    margin: .5rem 0;
+    display: table;
+}
+.smartTextarea > div{
+    display: table-row;
 }
 .smartTextarea input{
-    height: 1.5em;
-    font-size: 1em;
+    height: 2rem;
+    font-size: 1rem;
 }
 
 .btn {
@@ -12,14 +20,19 @@
     transition: box-shadow .3s;
     transition: box-shadow .3s, -webkit-box-shadow .3s;
     background: #eee;
-    padding: .3em;
+    padding: .3rem;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    height: 2em;
-    width: 2em;
+    height: 2rem;
+    width: 2rem;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    margin: .5rem;
+    box-sizing: border-box;
 }
 
 .btn-hover {
@@ -32,10 +45,8 @@
 .icon {
     width: 30px;
     height: 30px;
-    position: relative;
-    top: calc((2em - 30px)/2 - 4px);
 }
 
 #replaceField{
-    margin-top: .5em;
+    margin-top: .5rem;
 }
