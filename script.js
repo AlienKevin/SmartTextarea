@@ -38,6 +38,14 @@ function hideTermNotFoundTooltip(){
     FAR.notFoundTooltip.hide();
 }
 
+// position find and replace panel
+if (document.getElementById("FARTextarea").clientWidth >= 800 && 
+document.getElementById("FARTextarea").clientHeight >= 300){
+    document.getElementById("FARPanel").style.top = 0;
+    document.getElementById("FARPanel").style.right = 0;
+    document.getElementById("FARPanel").style.margin = 0;
+}
+
 document.getElementById("termSearch").addEventListener("keydown", disableUndo);
 document.getElementById("termSearch").addEventListener("input", () => {
     // turn off tooltip alert
