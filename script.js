@@ -29,18 +29,18 @@ FAR.notFoundTooltip = tippy('#termSearch', {
     animation: "perspective",
 })[0];
 
-function showTermNotFoundTooltip(){
+function showTermNotFoundTooltip() {
     FAR.notFoundTooltip.setContent($("#termSearch").value + " not found!");
     FAR.notFoundTooltip.show();
 }
 
-function hideTermNotFoundTooltip(){
+function hideTermNotFoundTooltip() {
     FAR.notFoundTooltip.hide();
 }
 
 // position find and replace panel
-if ($("#FARTextarea").clientWidth >= 800 && 
-$("#FARTextarea").clientHeight >= 300){
+if ($("#FARTextarea").clientWidth >= 800 &&
+    $("#FARTextarea").clientHeight >= 300) {
     $("#FARPanel").style.top = 0;
     $("#FARPanel").style.right = 0;
     $("#FARPanel").style.margin = 0;
@@ -122,7 +122,7 @@ FAR.find = function (lookForNext) {
 
     // if found, select it
     if (termPos != -1) {
-        textarea.setSelectionRange(termPos, termPos + strSearchTerm.length);
+        setSelectionRange(textarea, termPos, termPos + strSearchTerm.length);
     } else {
         // not found from cursor pos
         if (lookForNext) {
@@ -132,7 +132,7 @@ FAR.find = function (lookForNext) {
             termPos = txt.lastIndexOf(strSearchTerm);
         }
         if (termPos != -1) {
-            textarea.setSelectionRange(termPos, termPos + strSearchTerm.length);
+            setSelectionRange(textarea, termPos, termPos + strSearchTerm.length);
         } else {
             showTermNotFoundTooltip();
         }
@@ -163,7 +163,7 @@ FAR.findAndReplace = function () {
     if (termPos != -1) {
         newText = origTxt.substring(0, termPos) + strReplaceWith + origTxt.substring(termPos + strSearchTerm.length, origTxt.length)
         textarea.value = newText;
-        textarea.setSelectionRange(termPos, termPos + strReplaceWith.length);
+        setSelectionRange(textarea, termPos, termPos + strReplaceWith.length);
         FAR.history.save();
     } else {
         // not found from cursor pos, so start from beginning
@@ -171,7 +171,7 @@ FAR.findAndReplace = function () {
         if (termPos != -1) {
             newText = origTxt.substring(0, termPos) + strReplaceWith + origTxt.substring(termPos + strSearchTerm.length, origTxt.length)
             textarea.value = newText;
-            textarea.setSelectionRange(termPos, termPos + strReplaceWith.length);
+            setSelectionRange(textarea, termPos, termPos + strReplaceWith.length);
             FAR.history.save();
         } else {
             showTermNotFoundTooltip();
@@ -263,6 +263,25 @@ function getCursorPos(input) {
     return -1;
 }
 
+function setSelectionRange(textarea, selectionStart, selectionEnd) {
+    const fullText = textarea.value;
+    textarea.value = fullText.substring(0, selectionEnd);
+    const scrollHeight = textarea.scrollHeight
+    textarea.value = fullText;
+    let scrollTop = scrollHeight;
+	console.log('TCL: setSelectionRange -> scrollTop', scrollTop);
+    const textareaHeight = textarea.clientHeight;
+    if (scrollTop > textareaHeight){
+        scrollTop -= textareaHeight / 2;
+    } else{
+        scrollTop = 0;
+    }
+    console.log('TCL: setSelectionRange -> scrollTop', scrollTop);
+    textarea.scrollTop = scrollTop;
+    
+    textarea.setSelectionRange(selectionStart, selectionEnd);
+}
+
 // source: https://stackoverflow.com/a/31733628/6798201
 function copyString(str) {
     return (' ' + str).slice(1)
@@ -296,13 +315,13 @@ function setContent(newContent) {
 /*****Both of the below methods are already implemented in Chrome****/
 // A jQuery like shorthand for querySelector function
 // Source: https://gomakethings.com/making-it-easier-to-select-elements-with-vanilla-javascript/
-function $ (selector, scope) {
+function $(selector, scope) {
     scope = scope ? scope : document;
     return scope.querySelector(selector);
 }
 // A jQuery like shorthand for querySelectorAll function
 // Source: https://gomakethings.com/making-it-easier-to-select-elements-with-vanilla-javascript/
-function $$ (selector, scope) {
+function $$(selector, scope) {
     scope = scope ? scope : document;
     return scope.querySelectorAll(selector);
 };
