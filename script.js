@@ -21,7 +21,32 @@ $("#FARTextarea").addEventListener("keydown",
         if (evtobj.keyCode == 89 && evtobj.ctrlKey) {
             FAR.history.redo(setContent);
         };
+        toggleFARPanel(e);
     });
+
+$("#termSearch").addEventListener("keydown", (e) => {
+    toggleFARPanel(e)
+});
+$("#termReplace").addEventListener("keydown", (e) => {
+    toggleFARPanel(e)
+});
+
+function toggleFARPanel(e) {
+    console.log('TCL: toggleFARPanel -> toggleFARPanel');
+    var evtobj = window.event ? event : e
+
+    // detect ctrl+f (find)
+    if (evtobj.keyCode == 70 && evtobj.ctrlKey) {
+        console.log('TCL: toggleFARPanel -> ctrl+f is pressed!');
+        e.preventDefault();
+        toggleShowHide($("#FARPanel"), "table");
+        $("#termSearch").focus();
+    };
+    // detect esc (Escape)
+    if (evtobj.keyCode == 27) {
+        toggleShowHide($("#FARPanel"), "table");
+    }
+}
 
 // term not found tooltip
 FAR.notFoundTooltip = tippy('#termSearch', {
@@ -272,16 +297,16 @@ function setSelectionRange(textarea, selectionStart, selectionEnd) {
     const scrollHeight = textarea.scrollHeight
     textarea.value = fullText;
     let scrollTop = scrollHeight;
-	console.log('TCL: setSelectionRange -> scrollTop', scrollTop);
+    console.log('TCL: setSelectionRange -> scrollTop', scrollTop);
     const textareaHeight = textarea.clientHeight;
-    if (scrollTop > textareaHeight){
+    if (scrollTop > textareaHeight) {
         scrollTop -= textareaHeight / 2;
-    } else{
+    } else {
         scrollTop = 0;
     }
     console.log('TCL: setSelectionRange -> scrollTop', scrollTop);
     textarea.scrollTop = scrollTop;
-    
+
     textarea.setSelectionRange(selectionStart, selectionEnd);
 }
 
@@ -313,6 +338,24 @@ function getContent() {
 
 function setContent(newContent) {
     $("#FARTextarea").value = newContent;
+}
+
+// Toggle hide/show of an element
+function toggleShowHide(element, displayStyle = "block") {
+    console.log('TCL: toggleShowHide -> element.style.display', element.style.display);
+    if (getStyle(element, "display") === "none") {
+        console.log(`Showing ${element}...`);
+        element.style.display = displayStyle;
+    } else {
+        console.log(`Hiding ${element}...`);
+        element.style.display = "none";
+    }
+}
+
+// Get the computed style of an element that is usually defined in CSS stylesheet
+// Based on: https://stackoverflow.com/a/16748905/6798201
+function getStyle(element, name) {
+    return element.currentStyle ? element.currentStyle[name] : window.getComputedStyle ? window.getComputedStyle(element, null).getPropertyValue(name) : null;
 }
 
 /*****Both of the below methods are already implemented in Chrome****/

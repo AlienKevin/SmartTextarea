@@ -16,7 +16,7 @@ body{
 #FARPanel{
     font-size: 1.1rem;
     margin: .5rem 0;
-    display: table;
+    display: none;
     position: absolute;
 }
 #FARPanel > div{
