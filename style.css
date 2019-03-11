@@ -2,15 +2,15 @@ body{
     font-size: 16px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-.smartTextarea{
+.findAndReplace{
     font-size: 1.1rem;
     margin: .5rem 0;
     display: table;
 }
-.smartTextarea > div{
+.findAndReplace > div{
     display: table-row;
 }
-.smartTextarea input{
+.findAndReplace input{
     height: 2rem;
     font-size: 1rem;
 }

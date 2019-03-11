@@ -14,21 +14,23 @@
 </head>
 
 <body>
-    <textarea id="FARTextarea" style="width: 300px; height:100px">
-    This is a test. A test, i say. The word TEST is mentioned three times.
-</textarea>
-
     <div class="smartTextarea">
-        <div id="findField">
-            <input type="text" id="termSearch" placeholder="Find" />
-            <span id="caseSensitive" title="Match Case" class="btn"><img src="icons/caseSensitivity.svg" class="icon"></span>
-            <span id="findPrevious" title="Find Previous" class="btn"><i class="fas fa-arrow-left"></i></span>
-            <span id="findNext" title="Find Next" class="btn"><i class="fas fa-arrow-right"></i></span>
-        </div>
-        <div id="replaceField">
-            <input type="text" id="termReplace" placeholder="Replace" title="Replace" />
-            <span id="findAndReplace" title="Find & Replace" class="btn"><img src="icons/findAndReplace.svg" class="icon"></span>
-            <span id="replaceAll" title="Replace All" class="btn"><img src="icons/replaceAll.svg" class="icon"></span>
+        <textarea id="FARTextarea" style="width: 300px; height:100px">
+            This is a test. A test, i say. The word TEST is mentioned three times.
+        </textarea>
+
+        <div class="findAndReplace">
+            <div id="findField">
+                <input type="text" id="termSearch" placeholder="Find" />
+                <span id="caseSensitive" title="Match Case" class="btn"><img src="icons/caseSensitivity.svg" class="icon"></span>
+                <span id="findPrevious" title="Find Previous" class="btn"><i class="fas fa-arrow-left"></i></span>
+                <span id="findNext" title="Find Next" class="btn"><i class="fas fa-arrow-right"></i></span>
+            </div>
+            <div id="replaceField">
+                <input type="text" id="termReplace" placeholder="Replace" title="Replace" />
+                <span id="findAndReplace" title="Find & Replace" class="btn"><img src="icons/findAndReplace.svg" class="icon"></span>
+                <span id="replaceAll" title="Replace All" class="btn"><img src="icons/replaceAll.svg" class="icon"></span>
+            </div>
         </div>
     </div>
     <script src="simpleUndo.js"></script>
