@@ -24,12 +24,13 @@ document.getElementById("FARTextarea").addEventListener("keydown",
     });
 
 // term not found tooltip
-FAR.notFoundTooltip = new Tooltip(document.getElementById("termSearch"), {
-    trigger: 'manual',
-});
+FAR.notFoundTooltip = tippy('#termSearch', {
+    trigger: "manual",
+    animation: "perspective",
+})[0];
 
 function showTermNotFoundTooltip(){
-    FAR.notFoundTooltip.updateTitleContent(document.getElementById("termSearch").value + " not found!");
+    FAR.notFoundTooltip.setContent(document.getElementById("termSearch").value + " not found!");
     FAR.notFoundTooltip.show();
 }
 
