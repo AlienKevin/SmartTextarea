@@ -10,7 +10,7 @@ FAR.history = new SimpleUndo({
 });
 FAR.history.initialize(getContent());
 
-document.getElementById("FARTextarea").addEventListener("keydown",
+$("#FARTextarea").addEventListener("keydown",
     (e) => {
         var evtobj = window.event ? event : e
         // detect ctrl+z (undo)
@@ -30,7 +30,7 @@ FAR.notFoundTooltip = tippy('#termSearch', {
 })[0];
 
 function showTermNotFoundTooltip(){
-    FAR.notFoundTooltip.setContent(document.getElementById("termSearch").value + " not found!");
+    FAR.notFoundTooltip.setContent($("#termSearch").value + " not found!");
     FAR.notFoundTooltip.show();
 }
 
@@ -39,26 +39,26 @@ function hideTermNotFoundTooltip(){
 }
 
 // position find and replace panel
-if (document.getElementById("FARTextarea").clientWidth >= 800 && 
-document.getElementById("FARTextarea").clientHeight >= 300){
-    document.getElementById("FARPanel").style.top = 0;
-    document.getElementById("FARPanel").style.right = 0;
-    document.getElementById("FARPanel").style.margin = 0;
+if ($("#FARTextarea").clientWidth >= 800 && 
+$("#FARTextarea").clientHeight >= 300){
+    $("#FARPanel").style.top = 0;
+    $("#FARPanel").style.right = 0;
+    $("#FARPanel").style.margin = 0;
 }
 
-document.getElementById("termSearch").addEventListener("keydown", disableUndo);
-document.getElementById("termSearch").addEventListener("input", () => {
+$("#termSearch").addEventListener("keydown", disableUndo);
+$("#termSearch").addEventListener("input", () => {
     // turn off tooltip alert
     hideTermNotFoundTooltip();
 });
-document.getElementById("termReplace").addEventListener("keydown", disableUndo);
-document.getElementById("termSearch").addEventListener("keyup", disableUndo);
-document.getElementById("termReplace").addEventListener("keyup", disableUndo);
-document.getElementById("FARTextarea").addEventListener("keyup", disableUndo);
-document.getElementById("FARTextarea").addEventListener("keydown", disableUndo);
+$("#termReplace").addEventListener("keydown", disableUndo);
+$("#termSearch").addEventListener("keyup", disableUndo);
+$("#termReplace").addEventListener("keyup", disableUndo);
+$("#FARTextarea").addEventListener("keyup", disableUndo);
+$("#FARTextarea").addEventListener("keydown", disableUndo);
 
 FAR.previousContent = getContent();
-document.getElementById("FARTextarea").addEventListener("input", updateHistory);
+$("#FARTextarea").addEventListener("input", updateHistory);
 
 function updateHistory() {
     const content = getContent();
@@ -95,10 +95,10 @@ FAR.findPrevious = function () {
 
 FAR.find = function (lookForNext) {
     console.log('TCL: FAR.find -> find');
-    const textarea = document.getElementById("FARTextarea");
+    const textarea = $("#FARTextarea");
     // collect variables
     var txt = textarea.value;
-    var strSearchTerm = document.getElementById("termSearch").value;
+    var strSearchTerm = $("#termSearch").value;
 
     // make text lowercase if search is supposed to be case insensitive
     if (FAR.isCaseSensitive == false) {
@@ -140,12 +140,12 @@ FAR.find = function (lookForNext) {
 };
 
 FAR.findAndReplace = function () {
-    const textarea = document.getElementById("FARTextarea");
+    const textarea = $("#FARTextarea");
     // collect variables
     var origTxt = textarea.value; // needed for text replacement
     var txt = textarea.value;
-    var strSearchTerm = document.getElementById("termSearch").value;
-    var strReplaceWith = document.getElementById("termReplace").value;
+    var strSearchTerm = $("#termSearch").value;
+    var strReplaceWith = $("#termReplace").value;
     var termPos;
 
     // make text lowercase if search is supposed to be case insensitive
@@ -180,10 +180,10 @@ FAR.findAndReplace = function () {
 };
 
 FAR.replaceAll = function () {
-    const textarea = document.getElementById("FARTextarea");
+    const textarea = $("#FARTextarea");
     // collect variables
     var txt = textarea.value;
-    var strSearchTerm = document.getElementById("termSearch").value;
+    var strSearchTerm = $("#termSearch").value;
 
     // make text lowercase if search is supposed to be case insensitive
     if (FAR.isCaseSensitive == false) {
@@ -204,14 +204,14 @@ FAR.replaceAll = function () {
     }
 };
 
-document.getElementById("caseSensitive").addEventListener("click", (e) => {
+$("#caseSensitive").addEventListener("click", (e) => {
     FAR.isCaseSensitive = !FAR.isCaseSensitive;
-    document.getElementById("caseSensitive").classList.toggle("btn-hover");
+    $("#caseSensitive").classList.toggle("btn-hover");
 })
-document.getElementById("findPrevious").addEventListener("click", FAR.findPrevious);
-document.getElementById("findNext").addEventListener("click", FAR.findNext);
-document.getElementById("findAndReplace").addEventListener("click", FAR.findAndReplace);
-document.getElementById("replaceAll").addEventListener("click", FAR.replaceAll);
+$("#findPrevious").addEventListener("click", FAR.findPrevious);
+$("#findNext").addEventListener("click", FAR.findNext);
+$("#findAndReplace").addEventListener("click", FAR.findAndReplace);
+$("#replaceAll").addEventListener("click", FAR.replaceAll);
 
 document.addEventListener("mouseover", toggleBtnHighlight);
 document.addEventListener("mouseout", toggleBtnHighlight);
@@ -223,7 +223,8 @@ function toggleBtnHighlight(e) {
     }
 }
 
-// Util methods
+/************************* Util methods ***********************/
+
 function getCursorPosEnd(input) {
     return getCursorPos(input).end;
 }
@@ -285,9 +286,23 @@ function getDifference(a, b) {
 }
 
 function getContent() {
-    return copyString(document.getElementById("FARTextarea").value);
+    return copyString($("#FARTextarea").value);
 }
 
 function setContent(newContent) {
-    document.getElementById("FARTextarea").value = newContent;
+    $("#FARTextarea").value = newContent;
 }
+
+/*****Both of the below methods are already implemented in Chrome****/
+// A jQuery like shorthand for querySelector function
+// Source: https://gomakethings.com/making-it-easier-to-select-elements-with-vanilla-javascript/
+function $ (selector, scope) {
+    scope = scope ? scope : document;
+    return scope.querySelector(selector);
+}
+// A jQuery like shorthand for querySelectorAll function
+// Source: https://gomakethings.com/making-it-easier-to-select-elements-with-vanilla-javascript/
+function $$ (selector, scope) {
+    scope = scope ? scope : document;
+    return scope.querySelectorAll(selector);
+};
