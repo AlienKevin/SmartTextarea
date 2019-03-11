@@ -23,7 +23,25 @@ document.getElementById("FARTextarea").addEventListener("keydown",
         };
     });
 
+// term not found tooltip
+FAR.notFoundTooltip = new Tooltip(document.getElementById("termSearch"), {
+    trigger: 'manual',
+});
+
+function showTermNotFoundTooltip(){
+    FAR.notFoundTooltip.updateTitleContent(document.getElementById("termSearch").value + " not found!");
+    FAR.notFoundTooltip.show();
+}
+
+function hideTermNotFoundTooltip(){
+    FAR.notFoundTooltip.hide();
+}
+
 document.getElementById("termSearch").addEventListener("keydown", disableUndo);
+document.getElementById("termSearch").addEventListener("input", () => {
+    // turn off tooltip alert
+    hideTermNotFoundTooltip();
+});
 document.getElementById("termReplace").addEventListener("keydown", disableUndo);
 document.getElementById("termSearch").addEventListener("keyup", disableUndo);
 document.getElementById("termReplace").addEventListener("keyup", disableUndo);
@@ -34,7 +52,6 @@ FAR.previousContent = getContent();
 document.getElementById("FARTextarea").addEventListener("input", updateHistory);
 
 function updateHistory() {
-    console.log('TCL: input');
     const content = getContent();
     const difference = getDifference(FAR.previousContent, content);
     console.log('TCL: difference', difference);
@@ -108,7 +125,7 @@ FAR.find = function (lookForNext) {
         if (termPos != -1) {
             textarea.setSelectionRange(termPos, termPos + strSearchTerm.length);
         } else {
-            alert("not found");
+            showTermNotFoundTooltip();
         }
     }
 };
@@ -148,7 +165,7 @@ FAR.findAndReplace = function () {
             textarea.setSelectionRange(termPos, termPos + strReplaceWith.length);
             FAR.history.save();
         } else {
-            alert("not found");
+            showTermNotFoundTooltip();
         }
     }
 };
@@ -189,6 +206,7 @@ document.getElementById("replaceAll").addEventListener("click", FAR.replaceAll);
 
 document.addEventListener("mouseover", toggleBtnHighlight);
 document.addEventListener("mouseout", toggleBtnHighlight);
+
 function toggleBtnHighlight(e) {
     const hoveredButton = e.target.closest(".btn");
     if (hoveredButton) {

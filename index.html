@@ -20,18 +20,21 @@
 
     <div class="smartTextarea">
         <div id="findField">
-            <input type="text" id="termSearch" name="termSearch" placeholder="Find" title="Find" />
+            <input type="text" id="termSearch" placeholder="Find"/>
             <span id="caseSensitive" title="Match Case" class="btn"><img src="icons/caseSensitivity.svg" class="icon"></span>
             <span id="findPrevious" title="Find Previous" class="btn"><i class="fas fa-arrow-left"></i></span>
             <span id="findNext" title="Find Next" class="btn"><i class="fas fa-arrow-right"></i></span>
         </div>
         <div id="replaceField">
-            <input type="text" id="termReplace" name="termReplace" placeholder="Replace" title="Replace" />
+            <input type="text" id="termReplace" placeholder="Replace" title="Replace" />
             <span id="findAndReplace" title="Find & Replace" class="btn"><img src="icons/findAndReplace.svg" class="icon"></span>
             <span id="replaceAll" title="Replace All" class="btn"><img src="icons/replaceAll.svg" class="icon"></span>
         </div>
     </div>
     <script src="simpleUndo.js"></script>
+    <!--Load popper.js and tooltip.js-->
+    <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js"></script>
     <script src="script.js"></script>
 </body>
 
