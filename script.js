@@ -40,10 +40,12 @@ function toggleFARPanel(e) {
         console.log('TCL: toggleFARPanel -> ctrl+f is pressed!');
         e.preventDefault();
         toggleShowHide($("#FARPanel"), "table");
+        $("#FARTextarea").focus();
         $("#termSearch").focus();
     };
     // detect esc (Escape)
     if (evtobj.keyCode == 27) {
+        $("#FARTextarea").focus();
         toggleShowHide($("#FARPanel"), "table");
     }
 }
