@@ -263,6 +263,9 @@ function getCursorPos(input) {
     return -1;
 }
 
+// Set selection of text in a textarea
+// and scroll selection into middle of the screen
+// Based on: https://stackoverflow.com/a/53082182/6798201
 function setSelectionRange(textarea, selectionStart, selectionEnd) {
     const fullText = textarea.value;
     textarea.value = fullText.substring(0, selectionEnd);
