@@ -43,6 +43,11 @@ $("#FARTextarea").addEventListener("keydown",
         toggleFARPanel(e);
     });
 
+$("#closeFARPanel").addEventListener("click", (e) => {
+    toggleShowHide($("#FARPanel"), "table");
+    $("#FARTextarea").focus();
+});
+
 $("#termSearch").addEventListener("keydown", (e) => {
     toggleFARPanel(e);
     var evtobj = window.event ? event : e
