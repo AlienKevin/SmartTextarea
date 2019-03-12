@@ -17,7 +17,7 @@ Retain up to 100 versions in undo/redo history. Undo/redos are all in whole word
 
 ## Credits
 This project's Find and Replace functionality is based on Jens Fischer's StackOverflow answer on ["Find and Replace for an Textarea"](https://stackoverflow.com/questions/7781099/find-and-replace-for-an-textarea/7781395#7781395).
-The Find & Replace, Replace All, and Case Sensitive icons are based on [Visual Studio Code](https://github.com/Microsoft/vscode)'s icons.
+The Find & Replace, Replace All, and Case Sensitive icons are based on [Visual Studio Code](https://github.com/Microsoft/vscode)'s icons. The design of the find and replace panel is heavily based VS Code's.
 
 ## License
 This project is licensed under the terms of the MIT license.
