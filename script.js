@@ -1,6 +1,8 @@
 // Based on: https://stackoverflow.com/a/7781395/6798201
 const FAR = {};
 FAR.isCaseSensitive = false; // default to be case insensitive
+FAR.findMode = false; // find next search result when ENTER is pressed
+FAR.findAndReplaceMode = false; // find and replace next search result when ENTER is pressed
 // api source: https://github.com/mattjmattj/simple-undo
 FAR.history = new SimpleUndo({
     maxLength: 100,
@@ -21,18 +23,88 @@ $("#FARTextarea").addEventListener("keydown",
         if (evtobj.keyCode == 89 && evtobj.ctrlKey) {
             FAR.history.redo(setContent);
         };
+        // detect ENTER
+        if (evtobj.keyCode === 13) {
+            if (FAR.findMode) {
+                e.preventDefault();
+                FAR.findNext();
+                detectCursorMove($("#FARTextarea")).then(() => {
+                    console.log("cursor moved!");
+                    FAR.findMode = false;
+                });
+            } else if (FAR.findAndReplaceMode) {
+                e.preventDefault();
+                FAR.findAndReplace();
+                detectCursorMove($("#FARTextarea")).then(() => {
+                    FAR.findAndReplaceMode = false;
+                });
+            }
+        }
         toggleFARPanel(e);
     });
 
 $("#termSearch").addEventListener("keydown", (e) => {
-    toggleFARPanel(e)
+    toggleFARPanel(e);
+    var evtobj = window.event ? event : e
+    // detect ENTER
+    if (evtobj.keyCode === 13) {
+        e.preventDefault();
+        FAR.findNext();
+        FAR.findMode = true;
+        detectCursorMove($("#FARTextarea")).then(() => {
+            console.log("cursor moved!");
+            FAR.findMode = false;
+        });
+    }
 });
 $("#termReplace").addEventListener("keydown", (e) => {
-    toggleFARPanel(e)
+    toggleFARPanel(e);
+    var evtobj = window.event ? event : e
+    // detect ENTER
+    if (evtobj.keyCode === 13) {
+        e.preventDefault();
+        FAR.findAndReplace();
+        FAR.findAndReplaceMode = true;
+        detectCursorMove($("#FARTextarea")).then(() => {
+            console.log("cursor moved!");
+            FAR.findAndReplaceMode = false;
+        });
+    }
 });
 
+function detectCursorMove(input) {
+    // clear previous interval
+    if (FAR.detectCursorMoveTimeId) {
+        clearInterval(FAR.detectCursorMoveTimeId);
+    }
+    return new Promise(function (resolve, reject) {
+        let lastCursorPosition = getCursorPos(input);
+        const timeId = setInterval(function () {
+            console.log(`timeId ${timeId} detecting cursor move...`);
+            if (input !== document.activeElement) { // input not on focus
+                clearInterval(timeId);
+                resolve("input out of focus!");
+            } else {
+                let currentCursorPosition = getCursorPos(input);
+                if (!isSameCursorPosition(currentCursorPosition, lastCursorPosition)) {
+                    console.log('TCL: timeId -> lastCursorPosition', lastCursorPosition);
+                    console.log('TCL: timeId -> currentCursorPosition', currentCursorPosition);
+                    console.log('TCL: timeId -> timeId', timeId);
+                    clearInterval(timeId);
+                    resolve("cursor moved!");
+                }
+                lastCursorPosition = currentCursorPosition;
+            }
+        }, 100);
+        FAR.detectCursorMoveTimeId = timeId;
+    });
+}
+
+function isSameCursorPosition(posA, posB) {
+    return (posA.start === posB.start && posA.end === posB.end);
+}
+
 function toggleFARPanel(e) {
-    console.log('TCL: toggleFARPanel -> toggleFARPanel');
     var evtobj = window.event ? event : e
 
     // detect ctrl+f (find)
@@ -120,7 +192,7 @@ FAR.findPrevious = function () {
     FAR.find(false);
 }
 
-FAR.find = function (lookForNext) {
+FAR.find = function (lookForNext = true) {
     console.log('TCL: FAR.find -> find');
     const textarea = $("#FARTextarea");
     // collect variables
