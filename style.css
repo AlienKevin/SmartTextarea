@@ -18,6 +18,9 @@ html{
     margin: .5rem 0;
     display: none;
     position: absolute;
+    padding: .4rem;
+    background: #eee;
+    box-shadow: -0.1rem 0.1rem .5rem .2rem rgba(128, 128, 128, 0.8);
 }
 #FARPanel > div{
     display: table-row;
