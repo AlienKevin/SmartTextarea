@@ -27,6 +27,19 @@ html{
     font-size: 1.5rem;
 }
 
+#FARPanel #findField div{
+    position: relative;
+}
+
+#caseSensitive {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
 .btn {
     -webkit-transition: -webkit-box-shadow .3s;
     transition: -webkit-box-shadow .3s;
