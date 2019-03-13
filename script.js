@@ -1,33 +1,47 @@
 // Source: https://stackoverflow.com/questions/273789/is-there-a-version-of-javascripts-string-indexof-that-allows-for-regular-expr
-RegExp.escape= function(s) {
+RegExp.escape = function (s) {
     return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 };
 // Source: https://stackoverflow.com/questions/273789/is-there-a-version-of-javascripts-string-indexof-that-allows-for-regular-expr
-String.prototype.regexIndexOf = function(regex, startpos) {
+String.prototype.regexIndexOf = function (regex, startpos) {
     var indexOf = this.substring(startpos || 0).search(regex);
     return (indexOf >= 0) ? (indexOf + (startpos || 0)) : indexOf;
 }
 // Source: https://stackoverflow.com/questions/273789/is-there-a-version-of-javascripts-string-indexof-that-allows-for-regular-expr
-String.prototype.regexLastIndexOf = function(regex, startpos) {
+String.prototype.regexLastIndexOf = function (regex, startpos) {
     regex = (regex.global) ? regex : new RegExp(regex.source, "g" + (regex.ignoreCase ? "i" : "") + (regex.multiLine ? "m" : ""));
-    if(typeof (startpos) == "undefined") {
+    if (typeof (startpos) == "undefined") {
         startpos = this.length;
-    } else if(startpos < 0) {
+    } else if (startpos < 0) {
         startpos = 0;
     }
     var stringToWorkWith = this.substring(0, startpos + 1);
     var lastIndexOf = -1;
     var nextStop = 0;
-    while((result = regex.exec(stringToWorkWith)) != null) {
+    while ((result = regex.exec(stringToWorkWith)) != null) {
         lastIndexOf = result.index;
         regex.lastIndex = ++nextStop;
     }
     return lastIndexOf;
 }
-String.prototype.replaceFrom = function(search, replace, startIndex){
-    if (startIndex !== undefined){
+String.prototype.regexFindNext = function (regex, startIndex) {
+    regex.lastIndex = startIndex || 0;
+    var result = regex.exec(this);
+    if (result === null) {
+        var pos = -1;
+    } else {
+        var pos = result.index;
+        var matchLength = result[0].length;
+    }
+    return {
+        pos: pos,
+        matchLength: matchLength
+    };
+}
+String.prototype.replaceFrom = function (search, replace, startIndex) {
+    if (startIndex !== undefined) {
         return this.substring(0, startIndex) + this.substring(startIndex).replace(search, replace);
-    } else{
+    } else {
         return this.replace(search, replace);
     }
 }
@@ -236,23 +250,24 @@ FAR.find = function (lookForNext = true) {
     const textarea = $("#FARTextarea");
     // collect variables
     var txt = textarea.value;
-    var strSearchTerm = $("#termSearch").value;
-    var searchTermLength = strSearchTerm.length;
+    var searchRegex = $("#termSearch").value;
 
-    strSearchTerm = FAR.processRegexPattern(strSearchTerm);
+    searchRegex = FAR.processRegexPattern(searchRegex);
+    console.log('TCL: FAR.find -> strSearchTerm', searchRegex);
 
     // find next index of searchterm, starting from current cursor position
     var cursorPosEnd = getCursorPosEnd(textarea);
     console.log('TCL: FAR.find -> cursorPos', cursorPosEnd);
     if (lookForNext) { // next match
-        var termPos = txt.regexIndexOf(strSearchTerm, cursorPosEnd);
-		console.log('TCL: FAR.find -> termPos', termPos);
+        const result = txt.regexFindNext(searchRegex, cursorPosEnd);
+        var termPos = result.pos;
+        var searchTermLength = result.matchLength;
     } else { // previous match
         var cursorPosStart = getCursorPosStart(textarea) - 1;
         if (cursorPosStart < 0) {
             var termPos = -1;
         } else {
-            var termPos = txt.regexLastIndexOf(strSearchTerm, cursorPosStart);
+            var termPos = txt.regexLastIndexOf(searchRegex, cursorPosStart);
         }
     }
 
@@ -263,12 +278,17 @@ FAR.find = function (lookForNext = true) {
         // not found from cursor pos
         if (lookForNext) {
             // so start from beginning
-            termPos = txt.regexIndexOf(strSearchTerm);
+            const result = txt.regexFindNext(searchRegex, 0);
+            termPos = result.pos;
+            searchTermLength = result.matchLength;
         } else {
-            termPos = txt.regexLastIndexOf(strSearchTerm);
+            termPos = txt.regexLastIndexOf(searchRegex);
         }
         if (termPos != -1) {
             setSelectionRange(textarea, termPos, termPos + searchTermLength);
+            if (searchTermLength === undefined) {
+                FAR.find(lookForNext);
+            }
         } else {
             showTermNotFoundTooltip();
         }
@@ -290,7 +310,7 @@ FAR.findAndReplace = function () {
     // find next index of searchterm, starting from current cursor position
     var cursorPos = getCursorPosEnd(textarea);
     var termPos = txt.regexIndexOf(strSearchTerm, cursorPos);
-	console.log('TCL: FAR.findAndReplace -> termPos', termPos);
+    console.log('TCL: FAR.findAndReplace -> termPos', termPos);
     var newText = '';
 
     // if found, replace it, then select it
@@ -305,10 +325,11 @@ FAR.findAndReplace = function () {
             showTermNotFoundTooltip();
         }
     }
-    function replaceTerm(){
+
+    function replaceTerm() {
         newText = origTxt.replaceFrom(strSearchTerm, strReplaceWith, termPos);
-		console.log('TCL: FAR.findAndReplace -> strReplaceWith', strReplaceWith);
-		console.log('TCL: FAR.findAndReplace -> strSearchTerm', strSearchTerm);
+        console.log('TCL: FAR.findAndReplace -> strReplaceWith', strReplaceWith);
+        console.log('TCL: FAR.findAndReplace -> strSearchTerm', strSearchTerm);
         let replaceTermLength = searchTermLength + (newText.length - origTxt.length);
         textarea.value = newText;
         setSelectionRange(textarea, termPos, termPos + replaceTermLength);
@@ -337,15 +358,17 @@ FAR.replaceAll = function () {
     }
 };
 
-FAR.processRegexPattern = function(regexStr){
+FAR.processRegexPattern = function (regexStr) {
     let regex = regexStr;
     // escape special characters if search term is NOT a regular expression
-    if (FAR.isRegex === false){
+    if (FAR.isRegex === false) {
         regex = RegExp.escape(regexStr);
     }
     // make text lowercase if search is supposed to be case insensitive
     if (FAR.isCaseSensitive === false) {
-        regex = new RegExp(regex, "i");
+        regex = new RegExp(regex, "ig");
+    } else {
+        regex = new RegExp(regex, "g");
     }
     return regex;
 }
@@ -353,7 +376,11 @@ FAR.processRegexPattern = function(regexStr){
 $("#caseSensitive").addEventListener("click", (e) => {
     FAR.isCaseSensitive = !FAR.isCaseSensitive;
     $("#caseSensitive").classList.toggle("btn-hover");
-})
+});
+$("#useRegex").addEventListener("click", (e) => {
+    FAR.isRegex = !FAR.isRegex;
+    $("#useRegex").classList.toggle("btn-hover");
+});
 $("#findPrevious").addEventListener("click", FAR.findPrevious);
 $("#findNext").addEventListener("click", FAR.findNext);
 $("#findAndReplace").addEventListener("click", FAR.findAndReplace);
