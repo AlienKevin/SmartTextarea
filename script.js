@@ -326,10 +326,10 @@ FAR.replaceAll = function () {
 
     // find all occurances of search string
     var matches = [];
-    var pos = txt.indexOf(strSearchTerm);
+    var pos = txt.regexIndexOf(strSearchTerm);
     while (pos > -1) {
         matches.push(pos);
-        pos = txt.indexOf(strSearchTerm, pos + 1);
+        pos = txt.regexIndexOf(strSearchTerm, pos + 1);
     }
 
     for (var match in matches) {
