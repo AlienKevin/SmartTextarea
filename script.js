@@ -1,3 +1,29 @@
+// Source: https://stackoverflow.com/questions/273789/is-there-a-version-of-javascripts-string-indexof-that-allows-for-regular-expr
+RegExp.escape= function(s) {
+    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+};
+// Source: https://stackoverflow.com/questions/273789/is-there-a-version-of-javascripts-string-indexof-that-allows-for-regular-expr
+String.prototype.regexIndexOf = function(regex, startpos) {
+    var indexOf = this.substring(startpos || 0).search(regex);
+    return (indexOf >= 0) ? (indexOf + (startpos || 0)) : indexOf;
+}
+// Source: https://stackoverflow.com/questions/273789/is-there-a-version-of-javascripts-string-indexof-that-allows-for-regular-expr
+String.prototype.regexLastIndexOf = function(regex, startpos) {
+    regex = (regex.global) ? regex : new RegExp(regex.source, "g" + (regex.ignoreCase ? "i" : "") + (regex.multiLine ? "m" : ""));
+    if(typeof (startpos) == "undefined") {
+        startpos = this.length;
+    } else if(startpos < 0) {
+        startpos = 0;
+    }
+    var stringToWorkWith = this.substring(0, startpos + 1);
+    var lastIndexOf = -1;
+    var nextStop = 0;
+    while((result = regex.exec(stringToWorkWith)) != null) {
+        lastIndexOf = result.index;
+        regex.lastIndex = ++nextStop;
+    }
+    return lastIndexOf;
+}
 // Based on: https://stackoverflow.com/a/7781395/6798201
 const FAR = {};
 FAR.isCaseSensitive = false; // default to be case insensitive
@@ -203,40 +229,44 @@ FAR.find = function (lookForNext = true) {
     // collect variables
     var txt = textarea.value;
     var strSearchTerm = $("#termSearch").value;
+    var searchTermLength = strSearchTerm.length;
+
+    strSearchTerm = RegExp.escape(strSearchTerm);
+	console.log('TCL: FAR.find -> strSearchTerm', strSearchTerm);
 
     // make text lowercase if search is supposed to be case insensitive
     if (FAR.isCaseSensitive == false) {
-        txt = txt.toLowerCase();
-        strSearchTerm = strSearchTerm.toLowerCase();
+        strSearchTerm = new RegExp(strSearchTerm, "i");
     }
 
     // find next index of searchterm, starting from current cursor position
     var cursorPosEnd = getCursorPosEnd(textarea);
     console.log('TCL: FAR.find -> cursorPos', cursorPosEnd);
     if (lookForNext) { // next match
-        var termPos = txt.indexOf(strSearchTerm, cursorPosEnd);
+        var termPos = txt.regexIndexOf(strSearchTerm, cursorPosEnd);
+		console.log('TCL: FAR.find -> termPos', termPos);
     } else { // previous match
         var cursorPosStart = getCursorPosStart(textarea) - 1;
         if (cursorPosStart < 0) {
             var termPos = -1;
         } else {
-            var termPos = txt.lastIndexOf(strSearchTerm, cursorPosStart);
+            var termPos = txt.regexLastIndexOf(strSearchTerm, cursorPosStart);
         }
     }
 
     // if found, select it
     if (termPos != -1) {
-        setSelectionRange(textarea, termPos, termPos + strSearchTerm.length);
+        setSelectionRange(textarea, termPos, termPos + searchTermLength);
     } else {
         // not found from cursor pos
         if (lookForNext) {
             // so start from beginning
-            termPos = txt.indexOf(strSearchTerm);
+            termPos = txt.regexIndexOf(strSearchTerm);
         } else {
-            termPos = txt.lastIndexOf(strSearchTerm);
+            termPos = txt.regexLastIndexOf(strSearchTerm);
         }
         if (termPos != -1) {
-            setSelectionRange(textarea, termPos, termPos + strSearchTerm.length);
+            setSelectionRange(textarea, termPos, termPos + searchTermLength);
         } else {
             showTermNotFoundTooltip();
         }
