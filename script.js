@@ -24,6 +24,13 @@ String.prototype.regexLastIndexOf = function(regex, startpos) {
     }
     return lastIndexOf;
 }
+String.prototype.replaceFrom = function(search, replace, startIndex){
+    if (startIndex !== undefined){
+        return this.substring(0, startIndex) + this.substring(startIndex).replace(search, replace);
+    } else{
+        return this.replace(search, replace);
+    }
+}
 // Based on: https://stackoverflow.com/a/7781395/6798201
 const FAR = {};
 FAR.isCaseSensitive = false; // default to be case insensitive
@@ -281,35 +288,40 @@ FAR.findAndReplace = function () {
     var strSearchTerm = $("#termSearch").value;
     var strReplaceWith = $("#termReplace").value;
     var termPos;
+    var searchTermLength = strSearchTerm.length;
+    strSearchTerm = RegExp.escape(strSearchTerm);
 
     // make text lowercase if search is supposed to be case insensitive
     if (FAR.isCaseSensitive == false) {
-        txt = txt.toLowerCase();
-        strSearchTerm = strSearchTerm.toLowerCase();
+        strSearchTerm = new RegExp(strSearchTerm, "i");
     }
 
     // find next index of searchterm, starting from current cursor position
     var cursorPos = getCursorPosEnd(textarea);
-    var termPos = txt.indexOf(strSearchTerm, cursorPos);
+    var termPos = txt.regexIndexOf(strSearchTerm, cursorPos);
+	console.log('TCL: FAR.findAndReplace -> termPos', termPos);
     var newText = '';
 
     // if found, replace it, then select it
     if (termPos != -1) {
-        newText = origTxt.substring(0, termPos) + strReplaceWith + origTxt.substring(termPos + strSearchTerm.length, origTxt.length)
-        textarea.value = newText;
-        setSelectionRange(textarea, termPos, termPos + strReplaceWith.length);
-        FAR.history.save();
+        replaceTerm();
     } else {
         // not found from cursor pos, so start from beginning
-        termPos = txt.indexOf(strSearchTerm);
+        termPos = txt.regexIndexOf(strSearchTerm);
         if (termPos != -1) {
-            newText = origTxt.substring(0, termPos) + strReplaceWith + origTxt.substring(termPos + strSearchTerm.length, origTxt.length)
-            textarea.value = newText;
-            setSelectionRange(textarea, termPos, termPos + strReplaceWith.length);
-            FAR.history.save();
+            replaceTerm();
         } else {
             showTermNotFoundTooltip();
         }
+    }
+    function replaceTerm(){
+        newText = origTxt.replaceFrom(strSearchTerm, strReplaceWith, termPos);
+		console.log('TCL: FAR.findAndReplace -> strReplaceWith', strReplaceWith);
+		console.log('TCL: FAR.findAndReplace -> strSearchTerm', strSearchTerm);
+        let replaceTermLength = searchTermLength + (newText.length - origTxt.length);
+        textarea.value = newText;
+        setSelectionRange(textarea, termPos, termPos + replaceTermLength);
+        FAR.history.save();
     }
 };
 
