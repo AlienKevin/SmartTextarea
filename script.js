@@ -25,6 +25,8 @@ String.prototype.regexLastIndexOf = function (regex, startpos) {
     return lastIndexOf;
 }
 String.prototype.regexFindNext = function (regex, startIndex) {
+    // add global flag to regex so that lastIndex of regex.exec works
+    regex = (regex.global) ? regex : new RegExp(regex.source, "g" + (regex.ignoreCase ? "i" : "") + (regex.multiLine ? "m" : ""));
     regex.lastIndex = startIndex || 0;
     var result = regex.exec(this);
     if (result === null) {
@@ -39,6 +41,7 @@ String.prototype.regexFindNext = function (regex, startIndex) {
     };
 }
 String.prototype.regexFindPrevious = function (regex, startIndex) {
+    // add global flag to regex so that lastIndex of regex.exec works
     regex = (regex.global) ? regex : new RegExp(regex.source, "g" + (regex.ignoreCase ? "i" : "") + (regex.multiLine ? "m" : ""));
     if (typeof (startIndex) == "undefined") {
         startIndex = this.length;
@@ -60,7 +63,7 @@ String.prototype.regexFindPrevious = function (regex, startIndex) {
     };
 }
 String.prototype.replaceFrom = function (search, replace, startIndex) {
-    if (startIndex !== undefined) {
+    if (startIndex >= 0) {
         return this.substring(0, startIndex) + this.substring(startIndex).replace(search, replace);
     } else {
         return this.replace(search, replace);
@@ -326,16 +329,17 @@ FAR.findAndReplace = function () {
     // collect variables
     var origTxt = textarea.value; // needed for text replacement
     var txt = textarea.value;
-    var strSearchTerm = $("#termSearch").value;
-    var strReplaceWith = $("#termReplace").value;
-    var termPos;
-    var searchTermLength = strSearchTerm.length;
+    var searchRegex = $("#termSearch").value;
+    var replaceRegex = $("#termReplace").value;
 
-    strSearchTerm = FAR.processRegexPattern(strSearchTerm);
+    searchRegex = FAR.processRegexPattern(searchRegex);
 
     // find next index of searchterm, starting from current cursor position
     var cursorPos = getCursorPosEnd(textarea);
-    var termPos = txt.regexIndexOf(strSearchTerm, cursorPos);
+    const result = txt.regexFindNext(searchRegex, cursorPos);
+    var termPos = result.pos;
+    var searchTermLength = result.matchLength;
+	console.log('TCL: FAR.findAndReplace -> searchTermLength', searchTermLength);
     console.log('TCL: FAR.findAndReplace -> termPos', termPos);
     var newText = '';
 
@@ -344,7 +348,9 @@ FAR.findAndReplace = function () {
         replaceTerm();
     } else {
         // not found from cursor pos, so start from beginning
-        termPos = txt.regexIndexOf(strSearchTerm);
+        const result = txt.regexFindNext(searchRegex, 0);
+        termPos = result.pos;
+        searchTermLength = result.matchLength;
         if (termPos != -1) {
             replaceTerm();
         } else {
@@ -353,10 +359,11 @@ FAR.findAndReplace = function () {
     }
 
     function replaceTerm() {
-        newText = origTxt.replaceFrom(strSearchTerm, strReplaceWith, termPos);
-        console.log('TCL: FAR.findAndReplace -> strReplaceWith', strReplaceWith);
-        console.log('TCL: FAR.findAndReplace -> strSearchTerm', strSearchTerm);
+        newText = origTxt.replaceFrom(searchRegex, replaceRegex, termPos);
+        console.log('TCL: FAR.findAndReplace -> strReplaceWith', replaceRegex);
+        console.log('TCL: FAR.findAndReplace -> strSearchTerm', searchRegex);
         let replaceTermLength = searchTermLength + (newText.length - origTxt.length);
+		console.log('TCL: replaceTerm -> replaceTermLength', replaceTermLength);
         textarea.value = newText;
         setSelectionRange(textarea, termPos, termPos + replaceTermLength);
         FAR.history.save();
@@ -392,9 +399,9 @@ FAR.processRegexPattern = function (regexStr) {
     }
     // make text lowercase if search is supposed to be case insensitive
     if (FAR.isCaseSensitive === false) {
-        regex = new RegExp(regex, "ig");
+        regex = new RegExp(regex, "i");
     } else {
-        regex = new RegExp(regex, "g");
+        regex = new RegExp(regex);
     }
     return regex;
 }
