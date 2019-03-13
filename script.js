@@ -34,6 +34,7 @@ String.prototype.replaceFrom = function(search, replace, startIndex){
 // Based on: https://stackoverflow.com/a/7781395/6798201
 const FAR = {};
 FAR.isCaseSensitive = false; // default to be case insensitive
+FAR.isRegex = false; // default to plain string search
 FAR.findMode = false; // find next search result when ENTER is pressed
 FAR.findAndReplaceMode = false; // find and replace next search result when ENTER is pressed
 // api source: https://github.com/mattjmattj/simple-undo
@@ -238,13 +239,7 @@ FAR.find = function (lookForNext = true) {
     var strSearchTerm = $("#termSearch").value;
     var searchTermLength = strSearchTerm.length;
 
-    strSearchTerm = RegExp.escape(strSearchTerm);
-	console.log('TCL: FAR.find -> strSearchTerm', strSearchTerm);
-
-    // make text lowercase if search is supposed to be case insensitive
-    if (FAR.isCaseSensitive == false) {
-        strSearchTerm = new RegExp(strSearchTerm, "i");
-    }
+    strSearchTerm = FAR.processRegexPattern(strSearchTerm);
 
     // find next index of searchterm, starting from current cursor position
     var cursorPosEnd = getCursorPosEnd(textarea);
@@ -289,12 +284,8 @@ FAR.findAndReplace = function () {
     var strReplaceWith = $("#termReplace").value;
     var termPos;
     var searchTermLength = strSearchTerm.length;
-    strSearchTerm = RegExp.escape(strSearchTerm);
 
-    // make text lowercase if search is supposed to be case insensitive
-    if (FAR.isCaseSensitive == false) {
-        strSearchTerm = new RegExp(strSearchTerm, "i");
-    }
+    strSearchTerm = FAR.processRegexPattern(strSearchTerm);
 
     // find next index of searchterm, starting from current cursor position
     var cursorPos = getCursorPosEnd(textarea);
@@ -331,11 +322,7 @@ FAR.replaceAll = function () {
     var txt = textarea.value;
     var strSearchTerm = $("#termSearch").value;
 
-    // make text lowercase if search is supposed to be case insensitive
-    if (FAR.isCaseSensitive == false) {
-        txt = txt.toLowerCase();
-        strSearchTerm = strSearchTerm.toLowerCase();
-    }
+    strSearchTerm = FAR.processRegexPattern(strSearchTerm);
 
     // find all occurances of search string
     var matches = [];
@@ -349,6 +336,19 @@ FAR.replaceAll = function () {
         FAR.findAndReplace();
     }
 };
+
+FAR.processRegexPattern = function(regexStr){
+    let regex = regexStr;
+    // escape special characters if search term is NOT a regular expression
+    if (FAR.isRegex === false){
+        regex = RegExp.escape(regexStr);
+    }
+    // make text lowercase if search is supposed to be case insensitive
+    if (FAR.isCaseSensitive === false) {
+        regex = new RegExp(regexStr, "i");
+    }
+    return regex;
+}
 
 $("#caseSensitive").addEventListener("click", (e) => {
     FAR.isCaseSensitive = !FAR.isCaseSensitive;
