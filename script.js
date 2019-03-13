@@ -345,7 +345,7 @@ FAR.processRegexPattern = function(regexStr){
     }
     // make text lowercase if search is supposed to be case insensitive
     if (FAR.isCaseSensitive === false) {
-        regex = new RegExp(regexStr, "i");
+        regex = new RegExp(regex, "i");
     }
     return regex;
 }
