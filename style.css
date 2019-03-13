@@ -34,13 +34,17 @@ html{
     position: relative;
 }
 
-#caseSensitive {
+#findField div:nth-child(1) .btn{
     position: absolute;
     top: 0;
     right: 0;
     margin: 0;
     height: 2.5rem;
     width: 2.5rem;
+}
+
+#findField #useRegex{
+    right: 2.5rem;
 }
 
 .btn {
