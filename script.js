@@ -38,6 +38,27 @@ String.prototype.regexFindNext = function (regex, startIndex) {
         matchLength: matchLength
     };
 }
+String.prototype.regexFindPrevious = function (regex, startIndex) {
+    regex = (regex.global) ? regex : new RegExp(regex.source, "g" + (regex.ignoreCase ? "i" : "") + (regex.multiLine ? "m" : ""));
+    if (typeof (startIndex) == "undefined") {
+        startIndex = this.length;
+    } else if (startIndex < 0) {
+        startIndex = 0;
+    }
+    var stringToWorkWith = this.substring(0, startIndex + 1);
+    var lastIndexOf = -1;
+    var nextStop = 0;
+    var matchLength;
+    while ((result = regex.exec(stringToWorkWith)) != null) {
+        lastIndexOf = result.index;
+        matchLength = result[0].length;
+        regex.lastIndex = ++nextStop;
+    }
+    return {
+        pos: lastIndexOf,
+        matchLength: matchLength
+    };
+}
 String.prototype.replaceFrom = function (search, replace, startIndex) {
     if (startIndex !== undefined) {
         return this.substring(0, startIndex) + this.substring(startIndex).replace(search, replace);
@@ -267,7 +288,9 @@ FAR.find = function (lookForNext = true) {
         if (cursorPosStart < 0) {
             var termPos = -1;
         } else {
-            var termPos = txt.regexLastIndexOf(searchRegex, cursorPosStart);
+            const result = txt.regexFindPrevious(searchRegex, cursorPosStart);
+            var termPos = result.pos;
+            var searchTermLength = result.matchLength;
         }
     }
 
@@ -282,7 +305,10 @@ FAR.find = function (lookForNext = true) {
             termPos = result.pos;
             searchTermLength = result.matchLength;
         } else {
-            termPos = txt.regexLastIndexOf(searchRegex);
+            // so start from end
+            const result = txt.regexFindPrevious(searchRegex, txt.length);
+            var termPos = result.pos;
+            var searchTermLength = result.matchLength;
         }
         if (termPos != -1) {
             setSelectionRange(textarea, termPos, termPos + searchTermLength);
