@@ -429,6 +429,15 @@ function toggleBtnHighlight(e) {
     }
 }
 
+// Undo changes in textarea
+FAR.undo = function(){
+    FAR.history.undo(setContent);
+}
+// Redo changes in textarea
+FAR.redo = function(){
+    FAR.history.redo(setContent);
+}
+
 /************************* Util methods ***********************/
 
 function getCursorPosEnd(input) {

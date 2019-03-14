@@ -1,25 +1,48 @@
 // Free up the "$" symbol for custom function
 jQuery.noConflict();
-(function( $ ) {
-    $(function() {
-        $.contextMenu({
-            selector: '#FARTextarea', 
-            callback: function(key, options) {
-				console.log('TCL: options', options);
-				console.log('TCL: key', key);
-                switch (key){
-                    case "copy":
-                        document.execCommand("copy");
-                        break;
-                }
-            },
-            items: {
-                "copy": {name: "Copy", icon: () => "icon-copy"},
-                "paste": {name: "Paste", icon: () => "icon-paste"},
-                "cut": {name: "Cut", icon: () => "icon-cut"},
-                "delete": {name: "Delete", icon: () => "icon-delete"},
-                "undo": {name: "Undo", icon: () => "icon-undo"},
-            }
-        });
-    });
-  })(jQuery);
+jQuery.contextMenu({
+    selector: '#FARTextarea',
+    callback: function (key, options) {
+        console.log('TCL: options', options);
+        console.log('TCL: key', key);
+        switch (key) {
+            case "undo":
+                FAR.undo();
+                break;
+            case "redo":
+                FAR.redo();
+                break;
+        }
+    },
+    items: {
+        "undo": {
+            name: "Undo",
+            icon: () => "icon-undo"
+        },
+        "redo": {
+            name: "Redo",
+            icon: () => "icon-redo"
+        },
+    }
+});
+
+function insertAtCursor(myField, myValue) {
+    //IE support
+    if (document.selection) {
+        myField.focus();
+        sel = document.selection.createRange();
+        sel.text = myValue;
+    }
+    //MOZILLA and others
+    else if (myField.selectionStart || myField.selectionStart == '0') {
+        var startPos = myField.selectionStart;
+        var endPos = myField.selectionEnd;
+        myField.value = myField.value.substring(0, startPos) +
+            myValue +
+            myField.value.substring(endPos, myField.value.length);
+        myField.selectionStart = startPos + myValue.length;
+        myField.selectionEnd = startPos + myValue.length;
+    } else {
+        myField.value += myValue;
+    }
+}
