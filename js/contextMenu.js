@@ -5,8 +5,13 @@ jQuery.noConflict();
         $.contextMenu({
             selector: '#FARTextarea', 
             callback: function(key, options) {
-                var m = "clicked: " + key;
-                window.console && console.log(m) || alert(m); 
+				console.log('TCL: options', options);
+				console.log('TCL: key', key);
+                switch (key){
+                    case "copy":
+                        document.execCommand("copy");
+                        break;
+                }
             },
             items: {
                 "copy": {name: "Copy", icon: () => "icon-copy"},
