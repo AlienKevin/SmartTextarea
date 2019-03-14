@@ -12,6 +12,8 @@ jQuery.contextMenu({
             case "redo":
                 FAR.redo();
                 break;
+            case "search":
+                FAR.findNext();
         }
     },
     items: {
@@ -30,6 +32,8 @@ jQuery.contextMenu({
     }
 });
 
+// Insert text at current cursor position in a textarea
+// Source: https://stackoverflow.com/a/11077016/6798201
 function insertAtCursor(myField, myValue) {
     //IE support
     if (document.selection) {
