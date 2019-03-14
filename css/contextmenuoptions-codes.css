@@ -1,7 +1,7 @@
 
-.icon-scissors:before { content: '\e800'; } /* '' */
-.icon-trash-empty:before { content: '\e801'; } /* '' */
-.icon-ccw:before { content: '\e802'; } /* '' */
-.icon-cw:before { content: '\e803'; } /* '' */
-.icon-docs:before { content: '\f0c5'; } /* '' */
+.icon-cut:before { content: '\e800'; } /* '' */
+.icon-delete:before { content: '\e801'; } /* '' */
+.icon-undo:before { content: '\e802'; } /* '' */
+.icon-redo:before { content: '\e803'; } /* '' */
+.icon-copy:before { content: '\f0c5'; } /* '' */
 .icon-paste:before { content: '\f0ea'; } /* '' */
