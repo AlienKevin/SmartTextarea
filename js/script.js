@@ -89,11 +89,11 @@ $("#FARTextarea").addEventListener("keydown",
         var evtobj = window.event ? event : e
         // detect ctrl+z (undo)
         if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
-            FAR.history.undo(setContent);
+            FAR.undo();
         };
         // detect ctrl+y (redo)
         if (evtobj.keyCode == 89 && evtobj.ctrlKey) {
-            FAR.history.redo(setContent);
+            FAR.redo();
         };
         // detect ENTER
         if (evtobj.keyCode === 13) {
