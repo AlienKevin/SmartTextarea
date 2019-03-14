@@ -13,7 +13,16 @@ jQuery.contextMenu({
                 FAR.redo();
                 break;
             case "search":
-                FAR.findNext();
+                const selectedText = window.getSelection().toString();
+                toggleShowHide($("#FARPanel"), "table");
+                if (selectedText !== ""){
+                    $("#termSearch").value = selectedText;
+                    FAR.findNext(selectedText);
+                    FAR.findMode = true;
+                } else{
+                    $("#termSearch").focus();
+                }
+                break;
         }
     },
     items: {
