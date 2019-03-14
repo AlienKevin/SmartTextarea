@@ -47,6 +47,12 @@ html{
     right: 2.5rem;
 }
 
+*[class^="icon-"]:before, *[class*=" icon-"]:before {
+    position: absolute;
+    left: 0;
+    width: 2em;
+}
+
 .btn {
     -webkit-transition: -webkit-box-shadow .3s;
     transition: -webkit-box-shadow .3s;
