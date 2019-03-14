@@ -23,6 +23,10 @@ jQuery.contextMenu({
             name: "Redo",
             icon: () => "icon-redo"
         },
+        "search": {
+            name: "Search",
+            icon: () => "icon-search"
+        },
     }
 });
 

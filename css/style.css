@@ -47,10 +47,26 @@ html{
     right: 2.5rem;
 }
 
-*[class^="icon-"]:before, *[class*=" icon-"]:before {
+li[class^="icon-"]:before, li[class*=" icon-"]:before {
     position: absolute;
     left: 0;
     width: 2em;
+}
+
+i[class^="icon-"]:before, i[class*=" icon-"]:before {
+    position: static;
+    font-size: 25px;
+}
+
+i.icon-caseSensitivity:before{
+    font-size: 20px;
+    position: relative;
+    right: 5px;
+}
+i.icon-caseSensitivity:before, i.icon-useRegex:before{
+    font-size: 20px;
+    position: relative;
+    top: 5px;
 }
 
 .btn {
@@ -79,16 +95,6 @@ html{
     -webkit-box-shadow: 0 0 11px rgba(33, 33, 33, .2);
     box-shadow: 0 0 11px rgba(33, 33, 33, .2);
     background: #ddd;
-}
-
-.icon {
-    width: 30px;
-    height: 30px;
-}
-
-.fa{
-    width: 25px;
-    height: 25px;
 }
 
 #replaceField{

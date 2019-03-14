@@ -1,7 +1,11 @@
 
-.icon-cut:before { content: '\e800'; } /* '' */
-.icon-delete:before { content: '\e801'; } /* '' */
+.icon-arrow-left:before { content: '\e800'; } /* '' */
+.icon-arrow-right:before { content: '\e801'; } /* '' */
 .icon-undo:before { content: '\e802'; } /* '' */
 .icon-redo:before { content: '\e803'; } /* '' */
-.icon-copy:before { content: '\f0c5'; } /* '' */
-.icon-paste:before { content: '\f0ea'; } /* '' */
+.icon-search:before { content: '\e804'; } /* '' */
+.icon-close:before { content: '\e805'; } /* '' */
+.icon-casesensitivity:before { content: '\e806'; } /* '' */
+.icon-findandreplace:before { content: '\e807'; } /* '' */
+.icon-useregex:before { content: '\e808'; } /* '' */
+.icon-replaceall:before { content: '\e809'; } /* '' */

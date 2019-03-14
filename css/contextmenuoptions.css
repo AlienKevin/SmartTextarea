@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'contextmenuoptions';
-  src: url('../font/contextmenuoptions.eot?5354358');
-  src: url('../font/contextmenuoptions.eot?5354358#iefix') format('embedded-opentype'),
-       url('../font/contextmenuoptions.woff2?5354358') format('woff2'),
-       url('../font/contextmenuoptions.woff?5354358') format('woff'),
-       url('../font/contextmenuoptions.ttf?5354358') format('truetype'),
-       url('../font/contextmenuoptions.svg?5354358#contextmenuoptions') format('svg');
+  src: url('../font/contextmenuoptions.eot?95659718');
+  src: url('../font/contextmenuoptions.eot?95659718#iefix') format('embedded-opentype'),
+       url('../font/contextmenuoptions.woff2?95659718') format('woff2'),
+       url('../font/contextmenuoptions.woff?95659718') format('woff'),
+       url('../font/contextmenuoptions.ttf?95659718') format('truetype'),
+       url('../font/contextmenuoptions.svg?95659718#contextmenuoptions') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'contextmenuoptions';
-    src: url('../font/contextmenuoptions.svg?5354358#contextmenuoptions') format('svg');
+    src: url('../font/contextmenuoptions.svg?95659718#contextmenuoptions') format('svg');
   }
 }
 */
@@ -55,9 +55,13 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
-.icon-cut:before { content: '\e800'; } /* '' */
-.icon-delete:before { content: '\e801'; } /* '' */
+.icon-arrow-left:before { content: '\e800'; } /* '' */
+.icon-arrow-right:before { content: '\e801'; } /* '' */
 .icon-undo:before { content: '\e802'; } /* '' */
 .icon-redo:before { content: '\e803'; } /* '' */
-.icon-copy:before { content: '\f0c5'; } /* '' */
-.icon-paste:before { content: '\f0ea'; } /* '' */
+.icon-search:before { content: '\e804'; } /* '' */
+.icon-close:before { content: '\e805'; } /* '' */
+.icon-casesensitivity:before { content: '\e806'; } /* '' */
+.icon-findandreplace:before { content: '\e807'; } /* '' */
+.icon-useregex:before { content: '\e808'; } /* '' */
+.icon-replaceall:before { content: '\e809'; } /* '' */
