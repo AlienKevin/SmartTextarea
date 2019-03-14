@@ -13,6 +13,9 @@ jQuery.noConflict();
                 "paste": {name: "Paste", icon: "paste"},
                 "cut": {name: "Cut", icon: "cut"},
                 "delete": {name: "Delete", icon: "delete"},
+                "undo": {name: "Undo", icon: function(){
+                    return 'context-menu-icon context-menu-icon-undo';
+                }},
             }
         });
     });
