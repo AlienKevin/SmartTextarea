@@ -1,5 +1,6 @@
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     mode: 'development',
@@ -10,6 +11,12 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            hash: false,
+            title: 'Smart Textarea',
+            template: './src/index.html',
+            filename: './index.html'
+        }),
         new MiniCssExtractPlugin({
             filename: "[name].css",
             chunkFilename: "[id].css"
