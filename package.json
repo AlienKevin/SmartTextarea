@@ -4,7 +4,8 @@
   "description": "A simplistic textarea in browser that supports undo, redo, find, and replace.",
   "private": true,
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --config webpack.dev.js",
+    "export": "webpack --config webpack.prod.js",
     "watch": "webpack --watch"
   },
   "repository": {
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/AlienKevin/SmartTextarea#readme",
   "devDependencies": {
+    "clean-webpack-plugin": "^2.0.1",
     "css-loader": "^2.1.1",
     "file-loader": "^3.0.1",
     "mini-css-extract-plugin": "^0.5.0",
@@ -26,7 +28,8 @@
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
+    "webpack-cli": "^3.3.0",
+    "webpack-merge": "^4.2.1"
   },
   "dependencies": {
     "jquery": "^3.3.1",
