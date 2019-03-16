@@ -1,6 +1,9 @@
-import jQuery from "jquery"
-import '../node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.js'
-import '../node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.css'
+import './utils.js'
+import './script.js'
+import jQuery from "jquery";
+import '../node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.js';
+import '../node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.css';
+import {FAR} from "./script.js";
 
 // Free up the "$" symbol for custom function
 jQuery.noConflict();
@@ -18,7 +21,7 @@ jQuery.contextMenu({
                 break;
             case "search":
                 const selectedText = window.getSelection().toString();
-                toggleShowHide($("#FARPanel"), "table");
+                toggleShowHide(document.querySelector("#FARPanel"), "table");
                 if (selectedText !== ""){
                     $("#termSearch").value = selectedText;
                     FAR.findNext(selectedText);

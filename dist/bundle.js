@@ -15159,37 +15159,43 @@ module.exports = g;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_jquery_contextmenu_dist_jquery_contextMenu_min_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.js */ "./node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.js");
-/* harmony import */ var _node_modules_jquery_contextmenu_dist_jquery_contextMenu_min_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_jquery_contextmenu_dist_jquery_contextMenu_min_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _node_modules_jquery_contextmenu_dist_jquery_contextMenu_min_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.css */ "./node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.css");
-/* harmony import */ var _node_modules_jquery_contextmenu_dist_jquery_contextMenu_min_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_jquery_contextmenu_dist_jquery_contextMenu_min_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ "./src/utils.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_utils_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _script_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./script.js */ "./src/script.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _node_modules_jquery_contextmenu_dist_jquery_contextMenu_min_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.js */ "./node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.js");
+/* harmony import */ var _node_modules_jquery_contextmenu_dist_jquery_contextMenu_min_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_jquery_contextmenu_dist_jquery_contextMenu_min_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _node_modules_jquery_contextmenu_dist_jquery_contextMenu_min_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.css */ "./node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.css");
+/* harmony import */ var _node_modules_jquery_contextmenu_dist_jquery_contextMenu_min_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_jquery_contextmenu_dist_jquery_contextMenu_min_css__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
 
 
 
 
 // Free up the "$" symbol for custom function
-jquery__WEBPACK_IMPORTED_MODULE_0___default.a.noConflict();
-jquery__WEBPACK_IMPORTED_MODULE_0___default.a.contextMenu({
+jquery__WEBPACK_IMPORTED_MODULE_2___default.a.noConflict();
+jquery__WEBPACK_IMPORTED_MODULE_2___default.a.contextMenu({
     selector: '#FARTextarea',
     callback: function (key, options) {
         console.log('TCL: options', options);
         console.log('TCL: key', key);
         switch (key) {
             case "undo":
-                FAR.undo();
+                _script_js__WEBPACK_IMPORTED_MODULE_1__["FAR"].undo();
                 break;
             case "redo":
-                FAR.redo();
+                _script_js__WEBPACK_IMPORTED_MODULE_1__["FAR"].redo();
                 break;
             case "search":
                 const selectedText = window.getSelection().toString();
-                toggleShowHide($("#FARPanel"), "table");
+                toggleShowHide(document.querySelector("#FARPanel"), "table");
                 if (selectedText !== ""){
                     $("#termSearch").value = selectedText;
-                    FAR.findNext(selectedText);
-                    FAR.findMode = true;
+                    _script_js__WEBPACK_IMPORTED_MODULE_1__["FAR"].findNext(selectedText);
+                    _script_js__WEBPACK_IMPORTED_MODULE_1__["FAR"].findMode = true;
                 } else{
                     $("#termSearch").focus();
                 }
@@ -15252,18 +15258,22 @@ function insertAtCursor(myField, myValue) {
 /*!***********************!*\
   !*** ./src/script.js ***!
   \***********************/
-/*! no exports provided */
+/*! exports provided: FAR */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var simple_undo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! simple-undo */ "./node_modules/simple-undo/lib/simple-undo.js");
-/* harmony import */ var simple_undo__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(simple_undo__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var tippy_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tippy.js */ "./node_modules/tippy.js/esm/index.all.js");
-/* harmony import */ var _contextmenuoptions_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contextmenuoptions.css */ "./src/contextmenuoptions.css");
-/* harmony import */ var _contextmenuoptions_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_contextmenuoptions_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FAR", function() { return FAR; });
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ "./src/utils.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_utils_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var simple_undo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! simple-undo */ "./node_modules/simple-undo/lib/simple-undo.js");
+/* harmony import */ var simple_undo__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(simple_undo__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var tippy_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tippy.js */ "./node_modules/tippy.js/esm/index.all.js");
+/* harmony import */ var _contextmenuoptions_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./contextmenuoptions.css */ "./src/contextmenuoptions.css");
+/* harmony import */ var _contextmenuoptions_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_contextmenuoptions_css__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -15348,7 +15358,7 @@ FAR.isRegex = false; // default to plain string search
 FAR.findMode = false; // find next search result when ENTER is pressed
 FAR.findAndReplaceMode = false; // find and replace next search result when ENTER is pressed
 // api source: https://github.com/mattjmattj/simple-undo
-FAR.history = new simple_undo__WEBPACK_IMPORTED_MODULE_1___default.a({
+FAR.history = new simple_undo__WEBPACK_IMPORTED_MODULE_2___default.a({
     maxLength: 100,
     provider: function (done) {
         done(getContent());
@@ -15472,7 +15482,7 @@ function toggleFARPanel(e) {
 }
 
 // term not found tooltip
-FAR.notFoundTooltip = Object(tippy_js__WEBPACK_IMPORTED_MODULE_2__["default"])('#termSearch', {
+FAR.notFoundTooltip = Object(tippy_js__WEBPACK_IMPORTED_MODULE_3__["default"])('#termSearch', {
     trigger: "manual",
     animation: "perspective",
 })[0];
@@ -15802,8 +15812,45 @@ function setContent(newContent) {
     $("#FARTextarea").value = newContent;
 }
 
+// export these functions for contextMenu.js
+
+
+/***/ }),
+
+/***/ "./src/style.css":
+/*!***********************!*\
+  !*** ./src/style.css ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/utils.js":
+/*!**********************!*\
+  !*** ./src/utils.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*****Both of the below methods are already implemented in Chrome****/
+// A jQuery like shorthand for querySelector function
+// Source: https://gomakethings.com/making-it-easier-to-select-elements-with-vanilla-javascript/
+window.$ = function(selector, scope) {
+    scope = scope ? scope : document;
+    return scope.querySelector(selector);
+}
+// A jQuery like shorthand for querySelectorAll function
+// Source: https://gomakethings.com/making-it-easier-to-select-elements-with-vanilla-javascript/
+window.$$ = function(selector, scope) {
+    scope = scope ? scope : document;
+    return scope.querySelectorAll(selector);
+};
+
 // Toggle hide/show of an element
-function toggleShowHide(element, displayStyle = "block") {
+window.toggleShowHide = function(element, displayStyle = "block") {
     console.log('TCL: toggleShowHide -> element.style.display', element.style.display);
     if (getStyle(element, "display") === "none") {
         console.log(`Showing ${element}...`);
@@ -15816,34 +15863,9 @@ function toggleShowHide(element, displayStyle = "block") {
 
 // Get the computed style of an element that is usually defined in CSS stylesheet
 // Based on: https://stackoverflow.com/a/16748905/6798201
-function getStyle(element, name) {
+window.getStyle = function(element, name) {
     return element.currentStyle ? element.currentStyle[name] : window.getComputedStyle ? window.getComputedStyle(element, null).getPropertyValue(name) : null;
 }
-
-/*****Both of the below methods are already implemented in Chrome****/
-// A jQuery like shorthand for querySelector function
-// Source: https://gomakethings.com/making-it-easier-to-select-elements-with-vanilla-javascript/
-function $(selector, scope) {
-    scope = scope ? scope : document;
-    return scope.querySelector(selector);
-}
-// A jQuery like shorthand for querySelectorAll function
-// Source: https://gomakethings.com/making-it-easier-to-select-elements-with-vanilla-javascript/
-function $$(selector, scope) {
-    scope = scope ? scope : document;
-    return scope.querySelectorAll(selector);
-};
-
-/***/ }),
-
-/***/ "./src/style.css":
-/*!***********************!*\
-  !*** ./src/style.css ***!
-  \***********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 

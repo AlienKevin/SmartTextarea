@@ -1,3 +1,4 @@
+import './utils.js'
 import './style.css'
 import SimpleUndo from 'simple-undo'
 import tippy from 'tippy.js'
@@ -536,34 +537,5 @@ function setContent(newContent) {
     $("#FARTextarea").value = newContent;
 }
 
-// Toggle hide/show of an element
-function toggleShowHide(element, displayStyle = "block") {
-    console.log('TCL: toggleShowHide -> element.style.display', element.style.display);
-    if (getStyle(element, "display") === "none") {
-        console.log(`Showing ${element}...`);
-        element.style.display = displayStyle;
-    } else {
-        console.log(`Hiding ${element}...`);
-        element.style.display = "none";
-    }
-}
-
-// Get the computed style of an element that is usually defined in CSS stylesheet
-// Based on: https://stackoverflow.com/a/16748905/6798201
-function getStyle(element, name) {
-    return element.currentStyle ? element.currentStyle[name] : window.getComputedStyle ? window.getComputedStyle(element, null).getPropertyValue(name) : null;
-}
-
-/*****Both of the below methods are already implemented in Chrome****/
-// A jQuery like shorthand for querySelector function
-// Source: https://gomakethings.com/making-it-easier-to-select-elements-with-vanilla-javascript/
-function $(selector, scope) {
-    scope = scope ? scope : document;
-    return scope.querySelector(selector);
-}
-// A jQuery like shorthand for querySelectorAll function
-// Source: https://gomakethings.com/making-it-easier-to-select-elements-with-vanilla-javascript/
-function $$(selector, scope) {
-    scope = scope ? scope : document;
-    return scope.querySelectorAll(selector);
-};
+// export these functions for contextMenu.js
+export {FAR};
