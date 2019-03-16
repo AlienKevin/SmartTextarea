@@ -1,3 +1,7 @@
+import jQuery from "jquery"
+import '../node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.js'
+import '../node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.css'
+
 // Free up the "$" symbol for custom function
 jQuery.noConflict();
 jQuery.contextMenu({

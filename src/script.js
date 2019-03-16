@@ -1,3 +1,8 @@
+import './style.css'
+import SimpleUndo from 'simple-undo'
+import tippy from 'tippy.js'
+import './contextmenuoptions.css'
+
 // Source: https://stackoverflow.com/questions/273789/is-there-a-version-of-javascripts-string-indexof-that-allows-for-regular-expr
 RegExp.escape = function (s) {
     return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -52,6 +57,7 @@ String.prototype.regexFindPrevious = function (regex, startIndex) {
     var lastIndexOf = -1;
     var nextStop = 0;
     var matchLength;
+    var result;
     while ((result = regex.exec(stringToWorkWith)) != null) {
         lastIndexOf = result.index;
         matchLength = result[0].length;
