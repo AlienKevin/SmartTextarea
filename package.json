@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack.dev.js",
     "export": "webpack --config webpack.prod.js",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch --config webpack.dev.js"
   },
   "repository": {
     "type": "git",

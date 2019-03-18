@@ -3,7 +3,7 @@ import './script.js'
 import jQuery from "jquery";
 import '../node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.js';
 import '../node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.css';
-import {FAR} from "./script.js";
+import {smartTextarea} from "./script.js";
 
 // Free up the "$" symbol for custom function
 jQuery.noConflict();
@@ -14,20 +14,20 @@ jQuery.contextMenu({
         console.log('TCL: key', key);
         switch (key) {
             case "undo":
-                FAR.undo();
+                smartTextarea.undo();
                 break;
             case "redo":
-                FAR.redo();
+                smartTextarea.redo();
                 break;
             case "search":
                 const selectedText = window.getSelection().toString();
-                toggleShowHide(document.querySelector("#FARPanel"), "table");
+                toggleShowHide(smartTextarea.FARPanel, "table");
                 if (selectedText !== ""){
-                    $("#termSearch").value = selectedText;
-                    FAR.findNext(selectedText);
-                    FAR.findMode = true;
+                    smartTextarea.termSearch.value = selectedText;
+                    smartTextarea.findNext(selectedText);
+                    smartTextarea.findMode = true;
                 } else{
-                    $("#termSearch").focus();
+                    smartTextarea.termSearch.focus();
                 }
                 break;
         }

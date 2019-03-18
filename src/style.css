@@ -13,7 +13,7 @@ html{
     height: 500px;
 }
 
-#FARPanel{
+.FARPanel{
     font-size: 1.1rem;
     margin: .5rem 0;
     display: none;
@@ -22,19 +22,19 @@ html{
     background: #eee;
     box-shadow: -0.1rem 0.1rem .5rem .2rem rgba(128, 128, 128, 0.8);
 }
-#FARPanel > div{
+.FARPanel > div{
     display: table-row;
 }
-#FARPanel input{
+.FARPanel input{
     height: 2.5rem;
     font-size: 1.5rem;
 }
 
-#FARPanel #findField div{
+.FARPanel .findField div{
     position: relative;
 }
 
-#findField div:nth-child(1) .btn{
+.findField div:nth-child(1) .btn{
     position: absolute;
     top: 0;
     right: 0;
@@ -43,7 +43,7 @@ html{
     width: 2.5rem;
 }
 
-#findField #useRegex{
+.findField div:nth-child(1) .btn.useRegexBtn{
     right: 2.5rem;
 }
 
@@ -97,6 +97,6 @@ i.icon-caseSensitivity:before, i.icon-useRegex:before{
     background: #ddd;
 }
 
-#replaceField{
+.replaceField{
     margin-top: .5rem;
 }
