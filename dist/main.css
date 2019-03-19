@@ -28,6 +28,11 @@ html{
 .FARPanel input{
     height: 2.5rem;
     font-size: 1.5rem;
+    outline: none;
+}
+
+.FARPanel input:focus{
+    background: #eee;
 }
 
 .FARPanel .findField div{
