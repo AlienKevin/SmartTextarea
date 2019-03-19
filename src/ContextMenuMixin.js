@@ -36,15 +36,18 @@ const ContextMenuMixin = superclass => class extends superclass {
             },
             items: {
                 "undo": {
-                    name: "Undo",
+                    name: `Undo   <span style="float: right">Ctrl+Z</span>`,
+                    isHtmlName: true,
                     icon: () => "icon-undo"
                 },
                 "redo": {
-                    name: "Redo",
+                    name: `Redo   <span style="float: right">Ctrl+Y</span>`,
+                    isHtmlName: true,
                     icon: () => "icon-redo"
                 },
                 "search": {
-                    name: "Search",
+                    name: `Search <span style="float: right">Ctrl+F</span>`,
+                    isHtmlName: true,
                     icon: () => "icon-search"
                 },
             }

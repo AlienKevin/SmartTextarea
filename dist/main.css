@@ -100,6 +100,11 @@ i.icon-caseSensitivity:before, i.icon-useRegex:before{
 .replaceField{
     margin-top: .5rem;
 }
+
+/* textarea context menu */
+ul li.context-menu-item{
+    padding-right: .6em;
+}
 @font-face {
   font-family: 'contextmenuoptions';
   src: url(c60fdd187f6123316e67cb3070f3efea.eot);

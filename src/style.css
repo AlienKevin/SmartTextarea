@@ -100,3 +100,8 @@ i.icon-caseSensitivity:before, i.icon-useRegex:before{
 .replaceField{
     margin-top: .5rem;
 }
+
+/* textarea context menu */
+ul li.context-menu-item{
+    padding-right: .6em;
+}
