@@ -13,14 +13,20 @@ window.$$ = function (selector, scope) {
 };
 
 // Toggle hide/show of an element
-window.toggleShowHide = function (element, displayStyle = "block") {
+window.toggleShowHide = function (element, displayStyle = "block", showCallback, hideCallback) {
     console.log('TCL: toggleShowHide -> element.style.display', element.style.display);
     if (getStyle(element, "display") === "none") {
         console.log(`Showing ${element}...`);
         show(element, displayStyle);
+        if (typeof showCallback === "function") {
+            showCallback();
+        }
     } else {
         console.log(`Hiding ${element}...`);
         hide(element);
+        if (typeof hideCallback === "function") {
+            hideCallback()
+        }
     }
 }
 

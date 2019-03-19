@@ -342,15 +342,25 @@ class SmartTextareaBase {
     search() {
         const selectedText = window.getSelection().toString();
         if (this.termSearch.value === selectedText) {
-            toggleShowHide(this.FARPanel, "table");
+            console.log('TCL: SmartTextareaBase -> search -> selectedText', selectedText);
+            toggleShowHide(this.FARPanel, "table",
+                () => {}, // show callback
+                () => { // hide callback
+                    this.textarea.focus();
+                });
+            if (selectedText === ""){
+                this.termSearch.focus();
+            }
         } else {
-            show(this.FARPanel, "table");
             if (selectedText !== "") {
+                show(this.FARPanel, "table");
                 this.termSearch.value = selectedText;
                 this.findMode = true;
                 this.textarea.focus();
             } else {
-                this.termSearch.focus();
+                toggleShowHide(this.FARPanel, "table",
+                () => {this.termSearch.focus();},
+                () => {this.textarea.focus();});
             }
         }
     }
