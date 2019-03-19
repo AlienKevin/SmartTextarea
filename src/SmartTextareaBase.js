@@ -135,7 +135,7 @@ class SmartTextareaBase {
         ];
         const that = this;
         componentNameList.forEach(function (name) {
-			console.log('TCL: SmartTextarea -> _initializeFARComponentNames -> name', name);
+            console.log('TCL: SmartTextarea -> _initializeFARComponentNames -> name', name);
             that[name] = that.FARPanel.querySelector(`.${name}`);
         });
     }
@@ -169,7 +169,7 @@ class SmartTextareaBase {
         </div>`
         );
         this.FARPanel = this.textarea.nextElementSibling;
-		console.log('TCL: SmartTextarea -> _createFARPanel -> FARPanel', this.FARPanel);
+        console.log('TCL: SmartTextarea -> _createFARPanel -> FARPanel', this.FARPanel);
     }
 
     _setUpTextarea() {
@@ -330,14 +330,28 @@ class SmartTextareaBase {
         if (evtobj.keyCode == 70 && evtobj.ctrlKey) {
             console.log('TCL: toggleFARPanel -> ctrl+f is pressed!');
             e.preventDefault();
-            toggleShowHide(this.FARPanel, "table");
-            this.textarea.focus();
-            this.termSearch.focus();
+            this.search();
         };
         // detect esc (Escape)
         if (evtobj.keyCode == 27) {
             this.textarea.focus();
             toggleShowHide(this.FARPanel, "table");
+        }
+    }
+
+    search() {
+        const selectedText = window.getSelection().toString();
+        if (this.termSearch.value === selectedText) {
+            toggleShowHide(this.FARPanel, "table");
+        } else {
+            show(this.FARPanel, "table");
+            if (selectedText !== "") {
+                this.termSearch.value = selectedText;
+                this.findMode = true;
+                this.textarea.focus();
+            } else {
+                this.termSearch.focus();
+            }
         }
     }
 
@@ -644,4 +658,6 @@ class SmartTextareaBase {
 }
 
 // export the class for further composition
-export {SmartTextareaBase};
+export {
+    SmartTextareaBase
+};

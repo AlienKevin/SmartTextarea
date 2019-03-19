@@ -22,15 +22,7 @@ const ContextMenuMixin = superclass => class extends superclass {
                         that.redo();
                         break;
                     case "search":
-                        const selectedText = window.getSelection().toString();
-                        toggleShowHide(that.FARPanel, "table");
-                        if (selectedText !== "") {
-                            that.termSearch.value = selectedText;
-                            that.findNext(selectedText);
-                            that.findMode = true;
-                        } else {
-                            that.termSearch.focus();
-                        }
+                        that.search();
                         break;
                 }
             },
