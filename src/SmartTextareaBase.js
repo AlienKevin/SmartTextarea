@@ -668,6 +668,8 @@ class SmartTextareaBase {
 }
 
 // export the class for further composition
-export {
-    SmartTextareaBase
-};
+// browser global
+if (typeof window !== 'undefined') {
+	window.SmartTextareaBase = SmartTextareaBase;
+}
+export {SmartTextareaBase};

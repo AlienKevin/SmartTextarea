@@ -47,4 +47,9 @@ const ContextMenuMixin = superclass => class extends superclass {
     }
 }
 
+// export
+// browser global
+if (typeof window != 'undefined') {
+	window.ContextMenuMixin = ContextMenuMixin;
+}
 export {ContextMenuMixin};
