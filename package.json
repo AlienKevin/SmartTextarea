@@ -1,8 +1,7 @@
 {
-  "name": "findAndreplaceTextarea",
+  "name": "smart-textarea",
   "version": "1.0.0",
   "description": "A simplistic textarea in browser that supports undo, redo, find, and replace.",
-  "private": true,
   "scripts": {
     "build": "webpack --config webpack.dev.js",
     "export": "webpack --config webpack.prod.js",
@@ -12,9 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/AlienKevin/SmartTextarea.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["textarea", "find", "replace", "undo", "redo"],
+  "author": "Kevin Li",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/AlienKevin/SmartTextarea/issues"
   },

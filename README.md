@@ -22,6 +22,23 @@ To toggle **match case** when searching, click on the <img src="icons/caseSensit
 
 Default to save 100 versions in undo/redo history. (you can pass in custom values). Undo/redos are all in whole words as in many other word processors like Microsoft Word. You can also right click nad select "Undo" or "Redo" in the context menu to undo or redo.
 
+## Installation
+
+### NPM
+`npm install smart-textarea`
+
+## Usage
+
+```
+import {SmartTextareaBase} from "./SmartTextareaBase.js"
+import {ContextMenuMixin} from "./ContextMenuMixin.js"
+
+// Initialize smartTextarea
+class SmartTextarea extends ContextMenuMixin(SmartTextareaBase){
+
+}
+const smartTextarea = new SmartTextarea(document.getElementById("FARTextarea"));
+```
 ## Credits
 This project's Find and Replace functionality is based on Jens Fischer's StackOverflow answer on ["Find and Replace for an Textarea"](https://stackoverflow.com/questions/7781099/find-and-replace-for-an-textarea/7781395#7781395).
 The Find & Replace, Replace All, and Case Sensitive icons are based on [Visual Studio Code](https://github.com/Microsoft/vscode)'s icons. The design of the find and replace panel is heavily based VS Code's.
