@@ -28,17 +28,44 @@ Default to save 100 versions in undo/redo history. (you can pass in custom value
 `npm install smart-textarea`
 
 ## Usage
+The simplest way is to import the compressed and bundled JS and CSS files directly in your HTML file.
 
 ```
-import {SmartTextareaBase} from "./SmartTextareaBase.js"
-import {ContextMenuMixin} from "./ContextMenuMixin.js"
+<html lang="en">
 
-// Initialize smartTextarea
-class SmartTextarea extends ContextMenuMixin(SmartTextareaBase){
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        Smart Textarea Test
+    </title>
 
-}
-const smartTextarea = new SmartTextarea(document.getElementById("FARTextarea"));
+    <!--Load stylesheet for the find & replace box and context menu-->
+    <link rel="stylesheet" href="node_modules/smart-textarea/dist/main.css">
+
+<body>
+    <textarea id="textarea1">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </textarea>
+
+    <!--You can have more than one smartTextarea. They will all function independently-->
+    <textarea id="textarea2">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </textarea>
+
+    <!--Load script file for smartTextarea-->
+    <script src="node_modules/smart-textarea/dist/bundle.js"></script>
+
+    <!--Convert a normal textarea to a smartTextarea-->
+    <script>
+        const smartTextarea1 = new SmartTextarea(document.getElementById("textarea1"));
+        const smartTextarea2 = new SmartTextarea(document.getElementById("textarea2"));
+    </script>
+</html>
 ```
+
+
 ## Credits
 This project's Find and Replace functionality is based on Jens Fischer's StackOverflow answer on ["Find and Replace for an Textarea"](https://stackoverflow.com/questions/7781099/find-and-replace-for-an-textarea/7781395#7781395).
 The Find & Replace, Replace All, and Case Sensitive icons are based on [Visual Studio Code](https://github.com/Microsoft/vscode)'s icons. The design of the find and replace panel is heavily based VS Code's.
