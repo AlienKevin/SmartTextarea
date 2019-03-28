@@ -84,6 +84,7 @@ class SmartTextareaBase {
             throw new Error("No target textarea specified!");
         } else {
             this.textarea = textarea;
+            this.textarea.classList.add("FARTextarea");
         }
 
         const defaultOptions = {
