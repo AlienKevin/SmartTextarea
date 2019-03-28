@@ -1,8 +1,8 @@
-import {SmartTextareaBase} from "./SmartTextareaBase.js"
-import {ContextMenuMixin} from "./ContextMenuMixin.js"
+import "./SmartTextareaBase.js"
+import "./ContextMenuMixin.js"
 
 // Initialize smartTextarea
-class SmartTextarea extends ContextMenuMixin(SmartTextareaBase){
+window.SmartTextarea = class SmartTextarea extends ContextMenuMixin(SmartTextareaBase){
 
 }
-const smartTextarea = new SmartTextarea(document.getElementById("FARTextarea"));
+// const smartTextarea = new SmartTextarea(document.getElementById("FARTextarea"));
