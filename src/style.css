@@ -68,7 +68,7 @@ i.icon-caseSensitivity:before, i.icon-useRegex:before{
     top: 5px;
 }
 
-.btn {
+.smartTextarea .btn {
     -webkit-transition: -webkit-box-shadow .3s;
     transition: -webkit-box-shadow .3s;
     transition: box-shadow .3s;
@@ -89,14 +89,14 @@ i.icon-caseSensitivity:before, i.icon-useRegex:before{
     box-sizing: border-box;
 }
 
-.btn-hover {
+.smartTextarea .btn-hover {
     /* source: https://codepen.io/ovdojoey/pen/BomKyZ*/
     -webkit-box-shadow: 0 0 11px rgba(33, 33, 33, .2);
     box-shadow: 0 0 11px rgba(33, 33, 33, .2);
     background: #ddd;
 }
 
-.replaceField{
+.smartTextarea .replaceField{
     margin-top: .5rem;
 }
 
