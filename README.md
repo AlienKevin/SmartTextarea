@@ -12,9 +12,9 @@ To **activate** the Find and Replace panel, press <kbd>Ctrl+F</kbd>. You can als
 
 To find the **next occurence**, click on the 🡲 (right arrow icon) or press <kbd>Enter</kbd>. To find the **previous occurence**, click on the 🡰 (left arrow icon).
 
-To **find and replace next occurence**, click on the <img src="icons/findAndReplace.svg" width="14px"></img> icon. To **replace all occurences**, click on the <img src="icons/replaceAll.svg" width="14px"></img>
+To **find and replace next occurence**, click on the <img src="https://raw.github.com/AlienKevin/SmartTextarea/master/icons/findAndReplace.svg?sanitize=true" width="14px"></img> icon. To **replace all occurences**, click on the <img src="https://raw.github.com/AlienKevin/SmartTextarea/master/icons/replaceAll.svg?sanitize=true" width="14px"></img>
 
-To toggle **match case** when searching, click on the <img src="icons/caseSensitivity.svg" width="14px"></img> icon. To toggle **regular expression** when searching, click on the <img src="icons/useRegex.svg" width="14px"></img> icon.
+To toggle **match case** when searching, click on the <img src="https://raw.github.com/AlienKevin/SmartTextarea/master/icons/caseSensitivity.svg?sanitize=true" width="14px"></img> icon. To toggle **regular expression** when searching, click on the <img src="https://raw.github.com/AlienKevin/SmartTextarea/master/icons/useRegex.svg?sanitize=true" width="14px"></img> icon.
 
 ### Undo and Redo
 1. Press <kbd>Ctrl+Z</kbd> to undo
