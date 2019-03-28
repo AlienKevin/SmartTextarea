@@ -27,6 +27,43 @@ Default to save 100 versions in undo/redo history. (you can pass in custom value
 ### NPM
 `npm install smart-textarea`
 
+### CDN
+Add the below imports in your html
+1. jsDelivr
+```
+<html>
+<head>
+...
+<link href="https://cdn.jsdelivr.net/npm/smart-textarea@latest/dist/main.css" rel="stylesheet">
+</head>
+<body>
+...
+<script src="https://cdn.jsdelivr.net/npm/smart-textarea@latest/dist/bundle.js"></script>
+<script>
+    // Convert textareas to smartTextareas here
+    // See the Usage example below
+</script>
+</body>
+</html>
+```
+2. Unpkg:
+```
+<html>
+<head>
+...
+<link href="https://unpkg.com/smart-textarea@latest/dist/main.css" rel="stylesheet">
+</head>
+<body>
+...
+<script src="https://unpkg.com/smart-textarea@latest/dist/bundle.js"></script>
+<script>
+    // Convert textareas to smartTextareas here
+    // See the Usage example below
+</script>
+</body>
+</html>
+```
+
 ## Usage
 The simplest way is to import the compressed and bundled JS and CSS files directly in your HTML file.
 
