@@ -61,7 +61,7 @@
 .icon-redo:before { content: '\e803'; } /* '' */
 .icon-search:before { content: '\e804'; } /* '' */
 .icon-close:before { content: '\e805'; } /* '' */
-.icon-casesensitivity:before { content: '\e806'; } /* '' */
-.icon-findandreplace:before { content: '\e807'; } /* '' */
-.icon-useregex:before { content: '\e808'; } /* '' */
-.icon-replaceall:before { content: '\e809'; } /* '' */
+.icon-caseSensitivity:before { content: '\e806'; } /* '' */
+.icon-findAndReplace:before { content: '\e807'; } /* '' */
+.icon-useRegex:before { content: '\e808'; } /* '' */
+.icon-replaceAll:before { content: '\e809'; } /* '' */
