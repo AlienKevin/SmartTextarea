@@ -78,7 +78,7 @@ String.prototype.replaceFrom = function (search, replace, startIndex) {
 }
 
 // Based on: https://stackoverflow.com/a/7781395/6798201
-class SmartTextareaBase {
+class SmartTextarea {
     constructor(textarea, options) {
         if (textarea === undefined) {
             throw new Error("No target textarea specified!");
@@ -671,6 +671,6 @@ class SmartTextareaBase {
 // export the class for further composition
 // browser global
 if (typeof window !== 'undefined') {
-	window.SmartTextareaBase = SmartTextareaBase;
+	window.SmartTextarea = SmartTextarea;
 }
-export {SmartTextareaBase};
+export {SmartTextarea};
