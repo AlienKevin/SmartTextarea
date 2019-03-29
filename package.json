@@ -1,6 +1,6 @@
 {
   "name": "smart-textarea",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A simplistic textarea in browser that supports undo, redo, find, and replace.",
   "scripts": {
     "build": "webpack --config webpack.dev.js",
