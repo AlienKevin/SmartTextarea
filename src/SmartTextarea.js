@@ -89,6 +89,7 @@ class SmartTextarea {
 
         const defaultOptions = {
             isCaseSensitive: false,
+            isWholeWord: false,
             isRegex: false,
             maxHistoryLength: 100,
         }
@@ -96,9 +97,9 @@ class SmartTextarea {
             ...defaultOptions,
             ...options
         };
-        this.isCaseSensitive = mergedOptions.isCaseSensitive;
-        this.isRegex = mergedOptions.isRegex;
-        this.maxHistoryLength = mergedOptions.maxHistoryLength;
+        Object.keys(mergedOptions).forEach((key) => {
+            this[key] = mergedOptions[key];
+        });
 
         this.findMode = false; // find next search result when ENTER is pressed
         this.findAndReplaceMode = false; // find and replace next search result when ENTER is pressed
@@ -120,6 +121,9 @@ class SmartTextarea {
         // add btn-hover style to turned on buttons
         if (this.isCaseSensitive){
             this.caseSensitiveBtn.classList.add("btn-hover");
+        }
+        if (this.isWholeWord){
+            this.wholeWordBtn.classList.add("btn-hover");
         }
         if (this.isRegex){
             this.useRegexBtn.classList.add("btn-hover");
