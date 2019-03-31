@@ -117,6 +117,14 @@ class SmartTextarea {
         this._createFARPanel();
         this._initializeFARComponentNames();
 
+        // add btn-hover style to turned on buttons
+        if (this.isCaseSensitive){
+            this.caseSensitiveBtn.classList.add("btn-hover");
+        }
+        if (this.isRegex){
+            this.useRegexBtn.classList.add("btn-hover");
+        }
+
         this._initializeTermNotFoundTooltip();
 
         this._setUpTextarea();
