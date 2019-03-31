@@ -17,8 +17,8 @@
     display: table-row;
 }
 .FARPanel input{
-    height: 2.5rem;
-    font-size: 1.5rem;
+    height: 2rem;
+    font-size: 1rem;
     outline: none;
 }
 
@@ -35,12 +35,12 @@
     top: 0;
     right: 0;
     margin: 0;
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 2rem;
+    width: 2rem;
 }
 
 .findField div:nth-child(1) .btn.useRegexBtn{
-    right: 2.5rem;
+    right: 2rem;
 }
 
 li[class^="icon-"]:before, li[class*=" icon-"]:before {
@@ -51,18 +51,18 @@ li[class^="icon-"]:before, li[class*=" icon-"]:before {
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
     position: static;
-    font-size: 25px;
+    font-size: 1.2rem;
+}
+
+i.icon-caseSensitivity:before, i.icon-useRegex:before{
+    font-size: 1rem;
+    position: relative;
+    top: 15%;
 }
 
 i.icon-caseSensitivity:before{
-    font-size: 20px;
     position: relative;
-    right: 5px;
-}
-i.icon-caseSensitivity:before, i.icon-useRegex:before{
-    font-size: 20px;
-    position: relative;
-    top: 5px;
+    right: 20%;
 }
 
 .smartTextarea .btn {

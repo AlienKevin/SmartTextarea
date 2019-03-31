@@ -1,6 +1,6 @@
 {
   "name": "smart-textarea",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A simplistic textarea in browser that supports undo, redo, find, and replace.",
   "scripts": {
     "build": "webpack --config webpack.dev.js",
@@ -42,5 +42,5 @@
     "normalize.css": "^8.0.1",
     "simple-undo": "^1.0.2",
     "tippy.js": "^4.2.0"
-  }
+  },
 }
