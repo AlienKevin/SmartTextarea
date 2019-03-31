@@ -14,7 +14,7 @@ To find the **next occurence**, click on the 🡲 (right arrow icon) or press <k
 
 To **find and replace next occurence**, click on the <img src="https://raw.github.com/AlienKevin/SmartTextarea/master/icons/findAndReplace.svg?sanitize=true" width="14px"></img> icon. To **replace all occurences**, click on the <img src="https://raw.github.com/AlienKevin/SmartTextarea/master/icons/replaceAll.svg?sanitize=true" width="14px"></img>
 
-To toggle **match case** when searching, click on the <img src="https://raw.github.com/AlienKevin/SmartTextarea/master/icons/caseSensitivity.svg?sanitize=true" width="14px"></img> icon. To toggle **regular expression** when searching, click on the <img src="https://raw.github.com/AlienKevin/SmartTextarea/master/icons/useRegex.svg?sanitize=true" width="14px"></img> icon.
+To toggle **match case** when searching, click on the <img src="https://raw.github.com/AlienKevin/SmartTextarea/master/icons/caseSensitivity.svg?sanitize=true" width="14px"></img> icon. To toggle **regular expression** when searching, click on the <img src="https://raw.github.com/AlienKevin/SmartTextarea/master/icons/useRegex.svg?sanitize=true" width="14px"></img> icon. To toggle **match whole word** when searching, click on the <img src="https://raw.github.com/AlienKevin/SmartTextarea/master/icons/wholeWord.svg?sanitize=true" width="14px"></img> icon.
 
 ### Undo and Redo
 1. Press <kbd>Ctrl+Z</kbd> to undo
