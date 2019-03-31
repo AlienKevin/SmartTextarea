@@ -40,8 +40,16 @@
     width: 2rem;
 }
 
-.findField div:nth-child(1) .btn.useRegexBtn{
+.findField div:nth-child(1) .btn.caseSensitiveBtn{
+    right: 4rem;
+}
+
+.findField div:nth-child(1) .btn.wholeWordBtn{
     right: 2rem;
+}
+
+.findField div:nth-child(1) .btn.useRegexBtn{
+    right: 0;
 }
 
 li[class^="icon-"]:before, li[class*=" icon-"]:before {
@@ -55,13 +63,13 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
     font-size: 1.2rem;
 }
 
-i.icon-caseSensitivity:before, i.icon-useRegex:before{
+i.icon-caseSensitivity:before, i.icon-wholeWord:before, i.icon-useRegex:before{
     font-size: 1rem;
     position: relative;
     top: 15%;
 }
 
-i.icon-caseSensitivity:before{
+i.icon-caseSensitivity:before, i.icon-wholeWord:before{
     position: relative;
     right: 20%;
 }

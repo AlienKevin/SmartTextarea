@@ -168,6 +168,7 @@ class SmartTextarea {
                 <div>
                     <input type="text" class="termSearch" placeholder="Find" />
                     <span class="caseSensitiveBtn btn" title="Match Case"><i class="icon-caseSensitivity"></i></span>
+                    <span class="wholeWordBtn btn" title="Match Whole Word"><i class="icon-wholeWord"></i></span>
                     <span class="useRegexBtn btn" title="Use Regular Expression"><i class="icon-useRegex"></i></span>
                 </div>
                 <span class="findPreviousBtn btn" title="Find Previous"><i class="icon-arrow-left"></i></span>
