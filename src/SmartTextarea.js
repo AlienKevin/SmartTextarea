@@ -139,7 +139,7 @@ class SmartTextarea {
         const componentNameList = [
             "expandBtn",
             "findField",
-            "termSearch", "caseSensitiveBtn", "useRegexBtn", "findPreviousBtn", "findNextBtn", "closeFARPanelBtn",
+            "termSearch", "caseSensitiveBtn", "wholeWordBtn", "useRegexBtn", "findPreviousBtn", "findNextBtn", "closeFARPanelBtn",
             "replaceField",
             "termReplace", "findAndReplaceBtn", "replaceAllBtn"
         ];
@@ -304,6 +304,10 @@ class SmartTextarea {
         this.caseSensitiveBtn.addEventListener("click", (e) => {
             this.isCaseSensitive = !this.isCaseSensitive;
             this.caseSensitiveBtn.classList.toggle("btn-hover");
+        });
+        this.wholeWordBtn.addEventListener("click", (e) => {
+            this.isWholeWord = !this.isWholeWord;
+            this.wholeWordBtn.classList.toggle("btn-hover");
         });
         this.useRegexBtn.addEventListener("click", (e) => {
             this.isRegex = !this.isRegex;
