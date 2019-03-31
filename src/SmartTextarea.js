@@ -2,7 +2,7 @@ import './utils.js'
 import './style.css'
 import SimpleUndo from 'simple-undo'
 import tippy from 'tippy.js'
-import './contextmenuoptions.css'
+import './smart-textarea-icons.css'
 
 // Source: https://stackoverflow.com/questions/273789/is-there-a-version-of-javascripts-string-indexof-that-allows-for-regular-expr
 RegExp.escape = function (s) {
@@ -152,6 +152,7 @@ class SmartTextarea {
     _createFARPanel() {
         this.textarea.insertAdjacentHTML("afterend",
             `<div class="FARPanel">
+            <span class="expandBtn btn"><i class="icon-right-triangle"></i></span>
             <div class="findField">
                 <div>
                     <input type="text" class="termSearch" placeholder="Find" />

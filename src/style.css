@@ -10,6 +10,7 @@
     display: none;
     position: absolute;
     padding: .4rem;
+    padding-left: 1.2rem;
     background: #eee;
     box-shadow: -0.1rem 0.1rem .5rem .2rem rgba(128, 128, 128, 0.8);
 }
@@ -91,6 +92,19 @@ i.icon-caseSensitivity:before{
     -webkit-box-shadow: 0 0 11px rgba(33, 33, 33, .2);
     box-shadow: 0 0 11px rgba(33, 33, 33, .2);
     background: #ddd;
+}
+
+i.icon-right-triangle:before {
+    position: relative;
+    right: .7rem;
+    top: 0;
+}
+
+.smartTextarea .expandBtn {
+    position: absolute;
+    top: 0;
+    left: -.5rem;
+    width: 1.2rem;
 }
 
 .smartTextarea .replaceField{
