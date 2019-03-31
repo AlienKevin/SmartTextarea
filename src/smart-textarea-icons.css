@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'smart-textarea-icons';
-  src: url('../font/smart-textarea-icons.eot?56523579');
-  src: url('../font/smart-textarea-icons.eot?56523579#iefix') format('embedded-opentype'),
-       url('../font/smart-textarea-icons.woff2?56523579') format('woff2'),
-       url('../font/smart-textarea-icons.woff?56523579') format('woff'),
-       url('../font/smart-textarea-icons.ttf?56523579') format('truetype'),
-       url('../font/smart-textarea-icons.svg?56523579#smart-textarea-icons') format('svg');
+  src: url('../font/smart-textarea-icons.eot?22027457');
+  src: url('../font/smart-textarea-icons.eot?22027457#iefix') format('embedded-opentype'),
+       url('../font/smart-textarea-icons.woff2?22027457') format('woff2'),
+       url('../font/smart-textarea-icons.woff?22027457') format('woff'),
+       url('../font/smart-textarea-icons.ttf?22027457') format('truetype'),
+       url('../font/smart-textarea-icons.svg?22027457#smart-textarea-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'smart-textarea-icons';
-    src: url('../font/smart-textarea-icons.svg?56523579#smart-textarea-icons') format('svg');
+    src: url('../font/smart-textarea-icons.svg?22027457#smart-textarea-icons') format('svg');
   }
 }
 */
@@ -59,8 +59,9 @@
 .icon-arrow-right:before { content: '\e801'; } /* '' */
 .icon-right-triangle:before { content: '\e802'; } /* '' */
 .icon-down-triangle:before { content: '\e803'; } /* '' */
+.icon-wholeWord:before { content: '\e804'; } /* '' */
 .icon-close:before { content: '\e805'; } /* '' */
-.icon-casesensitivity:before { content: '\e806'; } /* '' */
-.icon-findandreplace:before { content: '\e807'; } /* '' */
-.icon-useregex:before { content: '\e808'; } /* '' */
-.icon-replaceall:before { content: '\e809'; } /* '' */
+.icon-caseSensitivity:before { content: '\e806'; } /* '' */
+.icon-findAndReplace:before { content: '\e807'; } /* '' */
+.icon-useRegex:before { content: '\e808'; } /* '' */
+.icon-replaceAll:before { content: '\e809'; } /* '' */
