@@ -580,6 +580,10 @@ class SmartTextarea {
         if (this.isRegex === false) {
             regex = RegExp.escape(regexStr);
         }
+        // match whole word or not
+        if (this.isWholeWord) {
+            regex = `\\b${regex}\\b`;
+        }
         // make text lowercase if search is supposed to be case insensitive
         if (this.isCaseSensitive === false) {
             regex = new RegExp(regex, "i");
