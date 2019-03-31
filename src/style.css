@@ -94,9 +94,9 @@ i.icon-caseSensitivity:before{
     background: #ddd;
 }
 
-i.icon-right-triangle:before {
+.smartTextarea .expandBtn i {
     position: relative;
-    right: .7rem;
+    right: .6rem;
     top: 0;
 }
 

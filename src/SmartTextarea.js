@@ -129,6 +129,7 @@ class SmartTextarea {
 
     _initializeFARComponentNames() {
         const componentNameList = [
+            "expandBtn",
             "findField",
             "termSearch", "caseSensitiveBtn", "useRegexBtn", "findPreviousBtn", "findNextBtn", "closeFARPanelBtn",
             "replaceField",
@@ -139,6 +140,8 @@ class SmartTextarea {
             console.log('TCL: SmartTextarea -> _initializeFARComponentNames -> name', name);
             that[name] = that.FARPanel.querySelector(`.${name}`);
         });
+
+        hide(this.replaceField);
     }
 
     _surroundTextareaWithDiv() {
@@ -276,6 +279,19 @@ class SmartTextarea {
 
     // set up buttons in FARPanel
     _setUpFARButtons() {
+        // show/hide replaceField
+        this.expandBtn.addEventListener("click", () => {
+            const icon = this.expandBtn.firstElementChild;
+            if (icon.classList.contains("icon-right-triangle")){
+                icon.classList.remove("icon-right-triangle");
+                icon.classList.add("icon-down-triangle");
+            } else{
+                icon.classList.remove("icon-down-triangle");
+                icon.classList.add("icon-right-triangle");
+            }
+            toggleShowHide(this.replaceField, "table-row");
+        });
+
         this.caseSensitiveBtn.addEventListener("click", (e) => {
             this.isCaseSensitive = !this.isCaseSensitive;
             this.caseSensitiveBtn.classList.toggle("btn-hover");
